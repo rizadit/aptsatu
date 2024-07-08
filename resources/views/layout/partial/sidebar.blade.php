@@ -8,7 +8,7 @@
           </div>
           <div class="nav-profile-text d-flex ml-0 mb-3 flex-column">
             @auth
-            <span class="font-weight-semibold mb-1 mt-2 text-center">{{ Auth::user()->username }}</span>
+            <span class="font-weight-semibold mb-1 mt-2 text-center">{{ Auth::user()->username }} Tes</span>
             {{-- <span class="text-secondary icon-sm text-center">$3499.00</span> --}}
             @endauth
           </div>
