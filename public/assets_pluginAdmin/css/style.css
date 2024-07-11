@@ -106,7 +106,16 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
-
+.dark-background {
+  --background-color: #37517e;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #4668a2;
+  --contrast-color: #ffffff;
+  background-image: url('/assets_pluginFront/assets/img/Background_Utama-01.png');
+  background-size: cover;
+  background-position: center;
+}
 @-webkit-keyframes flash {
   0% {
     opacity: 1; }

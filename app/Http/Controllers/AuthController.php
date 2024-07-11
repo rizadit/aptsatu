@@ -17,6 +17,8 @@ class AuthController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            session(['user' => $user]);
             return redirect()->intended('dashboard');
         }
 
@@ -28,6 +30,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
+        session()->forget('user');
         return redirect('/login');
     }
 }

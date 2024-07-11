@@ -23,7 +23,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="/">DJKN</a>
+            <a class="navbar-brand" href="/"><img src="{{ asset('assets_pluginAdmin/images/logoo.png') }}" alt="logo"></a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
     
 
     <!-- Footer-->
-    <footer class="footer text-center">
+    {{-- <footer class="footer text-center">
         <div class="container">
             <div class="row">
                 <!-- Footer Location-->
@@ -81,11 +81,11 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> --}}
     <!-- Copyright Section-->
-    <div class="copyright py-4 text-center text-white">
+    {{-- <div class="copyright py-4 text-center text-white">
         <div class="container"><small>Copyright &copy; APT Online 2024</small></div>
-    </div>
+    </div> --}}
     <!-- Portfolio Modals-->
     <!-- Portfolio Modal 1-->
     <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"

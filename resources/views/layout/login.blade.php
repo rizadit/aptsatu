@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -18,17 +19,37 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets_pluginLanding/style.css') }}" />
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('assets_pluginAdmin/images/favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets_pluginAdmin/images/logo_djkn.png') }}" />
+    <style>
+        .dark-background {
+            --background-color: #37517e;
+            --default-color: #ffffff;
+            --heading-color: #ffffff;
+            --surface-color: #4668a2;
+            --contrast-color: #ffffff;
+            background-image: url('/assets_pluginFront/assets/img/Background_Utama-01.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .center-image {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container-scroller">
+    <div class="container-scroller ">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
                 <div class="row flex-grow">
-                    <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                    <div class="col-lg-6 d-flex align-items-center justify-content-center ">
                         <div class="auth-form-transparent text-left p-3">
                             <div class="brand-logo">
-                                <img src="{{ asset('assets_pluginAdmin/images/logo.svg') }}" alt="logo">
+                                <img src="{{ asset('assets_pluginAdmin/images/logo_djkn.png') }}"  alt="logo">
                             </div>
                             <h4>Selamat Datang!</h4>
                             <h6 class="fw-light">Silahkan login!</h6>
@@ -42,7 +63,8 @@
                                                 <i class="mdi mdi-account-outline text-primary"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control form-control-lg border-left-0" id="username" name="username" placeholder="Username">
+                                        <input type="text" class="form-control form-control-lg border-left-0"
+                                            id="username" name="username" placeholder="Username">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -53,7 +75,8 @@
                                                 <i class="mdi mdi-lock-outline text-primary"></i>
                                             </span>
                                         </div>
-                                        <input type="password" class="form-control form-control-lg border-left-0" id="password" name="password" placeholder="Password">
+                                        <input type="password" class="form-control form-control-lg border-left-0"
+                                            id="password" name="password" placeholder="Password">
                                     </div>
                                 </div>
                                 {{-- <div class="my-2 d-flex justify-content-between align-items-center">
@@ -64,14 +87,17 @@
                                     <a href="#" class="auth-link text-black">Forgot password?</a>
                                 </div> --}}
                                 <div class="my-3 d-grid gap-2">
-                                    <button type="submit" class="btn btn-block btn-primary btn-lg fw-semibold auth-form-btn">LOGIN</button>
+                                    <button type="submit"
+                                        class="btn btn-block btn-success btn-lg fw-semibold auth-form-btn">LOGIN</button>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div class="col-lg-6 login-half-bg d-flex flex-row">
-                        <p class="text-white fw-semibold text-center flex-grow align-self-end">Copyright &copy; 2021 All rights reserved.</p>
+                    <div class="col-lg-6  d-flex flex-row dark-background align-items-center">
+                        <img src="{{ asset('assets_pluginFront/assets/img/Utama_Icon_Depan.png') }}" style="width:50%;" class="center-image" alt="">
+                        
                     </div>
+                    
                 </div>
             </div>
             <!-- content-wrapper ends -->
@@ -92,4 +118,5 @@
     <script src="{{ asset('assets_pluginAdmin/js/todolist.js') }}"></script>
     <!-- endinject -->
 </body>
+
 </html>
