@@ -30,7 +30,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('input') }}">
           <i class="mdi mdi-playlist-plus menu-icon"></i>
           <span class="menu-title">Input Data Layanan</span>
         </a>

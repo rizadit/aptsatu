@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InputDataLayananController;
 
 Route::get('/', function () {
     return view('home2');
@@ -16,6 +17,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+
+Route::get('/input', [InputDataLayananController::class, 'index'])->name('input');
+
 
 Route::get('/kemenkeu-id/login', [\App\Http\Controllers\KemenkeuID\Login::class, 'login'])
     ->name('kemenkeu-id.login');
