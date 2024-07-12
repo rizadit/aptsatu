@@ -19,7 +19,7 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets_pluginAdmin/css/demo_1/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets_pluginLanding/style.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets_pluginLanding/style.css') }}" /> --}}
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets_pluginAdmin/images/logo_djkn.png') }}" />
 </head>

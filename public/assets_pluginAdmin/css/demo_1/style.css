@@ -11097,7 +11097,7 @@ code {
     font-size: 13px; }
 
 .main-panel .content-wrapper .card-img {
-  background-image: url("../../images/bg_card.jpg");
+  background-image: url("/assets_pluginAdmin/images/bg_card.jpg");
   background-size: cover; }
 
 .main-panel .content-wrapper .star-color {

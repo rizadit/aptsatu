@@ -18,13 +18,13 @@
         <span class="nav-item-head">Menu</span>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('dashboard') }}">
           <i class="mdi mdi-clipboard-text menu-icon"></i>
           <span class="menu-title">Data Pengguna</span>          
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('detail-pengguna') }}">
           <i class="mdi mdi-pencil-box-outline menu-icon"></i>
           <span class="menu-title">Detail Pengguna</span>
         </a>
@@ -36,7 +36,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('survey') }}">
           <i class="mdi mdi-message-text-outline menu-icon"></i>
           <span class="menu-title">Survei Kepuasan</span>
         </a>

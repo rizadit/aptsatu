@@ -19,7 +19,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets_pluginLanding/style.css') }}" />
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('assets_pluginAdmin/images/logo_djkn.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets_pluginAdmin/images/logodjkn.png') }}" />
     <style>
         .dark-background {
             --background-color: #37517e;
@@ -49,7 +49,7 @@
                     <div class="col-lg-6 d-flex align-items-center justify-content-center ">
                         <div class="auth-form-transparent text-left p-3">
                             <div class="brand-logo">
-                                <img src="{{ asset('assets_pluginAdmin/images/logo_djkn.png') }}"  alt="logo">
+                                <img src="{{ asset('assets_pluginAdmin/images/logodjkn.png') }}"  alt="logo">
                             </div>
                             <h4>Selamat Datang!</h4>
                             <h6 class="fw-light">Silahkan login!</h6>
