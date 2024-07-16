@@ -7,6 +7,7 @@ use App\Http\Controllers\DetailPenggunaController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InputDataLayananController;
+use App\Http\Controllers\PengunjungController;
 use App\Http\Controllers\SurveyController;
 
 Route::get('/', function () {
@@ -17,8 +18,12 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::get('/pengunjung', [PengunjungController::class, 'index'])->name('pengunjung');
 Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+
+Route::resource('/pengunjung', \App\Http\Controllers\PengunjungController::class);
+Route::get('/search', [PengunjungController::class, 'search'])->name('search');
 
 Route::get('/input', [InputDataLayananController::class, 'index'])->name('input');
 Route::get('/detail-pengguna', [DetailPenggunaController::class, 'index'])->name('detail-pengguna');

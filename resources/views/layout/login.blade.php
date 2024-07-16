@@ -36,7 +36,7 @@
             margin-left: auto;
             margin-right: auto;
             display: block;
-            
+
         }
     </style>
 </head>
@@ -49,7 +49,7 @@
                     <div class="col-lg-6 d-flex align-items-center justify-content-center ">
                         <div class="auth-form-transparent text-left p-3">
                             <div class="brand-logo">
-                                <img src="{{ asset('assets_pluginAdmin/images/logodjkn.png') }}"  alt="logo">
+                                <img src="{{ asset('assets_pluginAdmin/images/logodjkn.png') }}" alt="logo">
                             </div>
                             <h4>Selamat Datang!</h4>
                             <h6 class="fw-light">Silahkan login!</h6>
@@ -94,10 +94,11 @@
                         </div>
                     </div>
                     <div class="col-lg-6  d-flex flex-row dark-background align-items-center">
-                        <img src="{{ asset('assets_pluginFront/assets/img/Utama_Icon_Depan.png') }}" style="width:50%;" class="center-image" alt="">
-                        
+                        <img src="{{ asset('assets_pluginFront/assets/img/Utama_Icon_Depan.png') }}" style="width:50%;"
+                            class="center-image" alt="">
+
                     </div>
-                    
+
                 </div>
             </div>
             <!-- content-wrapper ends -->

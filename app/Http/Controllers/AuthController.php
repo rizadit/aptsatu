@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\RUser;
 
 class AuthController extends Controller
 {
@@ -16,9 +18,16 @@ class AuthController extends Controller
     {
         $credentials = $request->only('username', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+        $user = RUser::where('USERNAME', $credentials['username'])->first();
+
+        if ($user && Hash::check($credentials['password'], $user->PASSWORD)) {
+            Auth::login($user);
             session(['user' => $user]);
+
+            if ($user->ROLE === 'kantor') {
+                return redirect()->intended('pengunjung');
+            }
+
             return redirect()->intended('dashboard');
         }
 
