@@ -3,26 +3,36 @@
 @section('content-header', 'Dashboard')
 @section('content-section')
 @endsection
-@section('content') 
+@section('content')
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">INPUT DATA</h4>
-                <p class="card-description"> Area Layanan Terpadu
-                </p>
+                <div class="page-header flex-wrap">
+                    <div class="header-left">
+                        <h4 class="card-title">DAFTAR PENGGUNA LAYANAN</h4>
+                        <p class="card-description"> Area Layanan Terpadu
+                        </p>
+                    </div>
+                    <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">                        
+                        <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
+                            <i class="mdi mdi-plus-circle"></i> Tambah Data </button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>User</th>
-                                <th>First name</th>
-                                <th>Progress</th>
-                                <th>Amount</th>
-                                <th>Deadline</th>
+                                <th>Tanggal</th>
+                                <th>Nomor Antrian</th>
+                                <th>Nama</th>
+                                <th>Urgensi</th>
+                                <th>Subjek</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
+                                <td>May 15, 2015</td>
                                 <td class="py-1">
                                     <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
                                 </td>
@@ -37,6 +47,7 @@
                                 <td>May 15, 2015</td>
                             </tr>
                             <tr>
+                                <td>May 15, 2015</td>
                                 <td class="py-1">
                                     <img src="../../assets/images/faces-clipart/pic-2.png" alt="image" />
                                 </td>
@@ -51,6 +62,7 @@
                                 <td>July 1, 2015</td>
                             </tr>
                             <tr>
+                                <td>May 15, 2015</td>
                                 <td class="py-1">
                                     <img src="../../assets/images/faces-clipart/pic-3.png" alt="image" />
                                 </td>
@@ -65,6 +77,7 @@
                                 <td>Apr 12, 2015</td>
                             </tr>
                             <tr>
+                                <td>May 15, 2015</td>
                                 <td class="py-1">
                                     <img src="../../assets/images/faces-clipart/pic-4.png" alt="image" />
                                 </td>
@@ -79,6 +92,7 @@
                                 <td>May 15, 2015</td>
                             </tr>
                             <tr>
+                                <td>May 15, 2015</td>
                                 <td class="py-1">
                                     <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
                                 </td>
@@ -93,6 +107,7 @@
                                 <td>May 03, 2015</td>
                             </tr>
                             <tr>
+                                <td>May 15, 2015</td>
                                 <td class="py-1">
                                     <img src="../../assets/images/faces-clipart/pic-2.png" alt="image" />
                                 </td>
@@ -107,6 +122,7 @@
                                 <td>April 05, 2015</td>
                             </tr>
                             <tr>
+                                <td>May 15, 2015</td>
                                 <td class="py-1">
                                     <img src="../../assets/images/faces-clipart/pic-3.png" alt="image" />
                                 </td>

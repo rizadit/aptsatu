@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\KemenkeuID;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
@@ -22,7 +22,8 @@ class Logout extends Controller
 
         $id_token = Session::get('id_token');
         //$post_logout_redirect_uri = route( 'ppid.landing');
-        $post_logout_redirect_uri = route('cms.login');
+        // $post_logout_redirect_uri = route('cms.login');
+        $post_logout_redirect_uri = '/';
 
         $endsession_url = $uri . '?id_token_hint=' . $id_token . '&post_logout_redirect_uri=' . $post_logout_redirect_uri;
 

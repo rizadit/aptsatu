@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\KemenkeuID;
+namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -97,8 +97,10 @@ class RequestKemenkeuID
      */
     private function defineEndPoint(): string
     {
-        if(config('kemenkeu_id.environment') === 'production')
-            return $this->constant::PROD_BASE_URL;
+        // if(config('kemenkeu_id.environment') === 'production'){
+        //     return $this->constant::PROD_BASE_URL;
+        // }
+            
 
         return $this->constant::DEV_BASE_URL;
     }

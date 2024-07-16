@@ -16,12 +16,22 @@ class RUserSeeder extends Seeder
     public function run()
     {
         DB::table('R_USER')->insert([
-            'USERNAME' => 'kantor',
-            'PASSWORD' => Hash::make('password'), // Ganti dengan hash password yang sesuai
-            'ROLE' => 'kantor',
-            'ID_KANTOR' => 1, // Pastikan ID_KANTOR ini sesuai dengan yang ada di tabel R_KANTOR
-            'CREATED_DATE' => now(),
-            'IS_AKTIF' => true,
+            [
+                'USERNAME' => 'kantor',
+                'PASSWORD' => Hash::make('password'), // Ganti dengan hash password yang sesuai
+                'ROLE' => 'kantor',
+                'ID_KANTOR' => 1, // Pastikan ID_KANTOR ini sesuai dengan yang ada di tabel R_KANTOR
+                'CREATED_DATE' => now(),
+                'IS_AKTIF' => true,
+            ],
+            [
+                'USERNAME' => 'superadmin',
+                'PASSWORD' => Hash::make('superadminpassword'), // Ganti dengan hash password yang sesuai
+                'ROLE' => 'superadmin',
+                'ID_KANTOR' => 1, // Pastikan ID_KANTOR ini sesuai dengan yang ada di tabel R_KANTOR
+                'CREATED_DATE' => now(),
+                'IS_AKTIF' => true,
+            ]
         ]);
     }
 }

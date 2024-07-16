@@ -30,11 +30,11 @@ Route::get('/detail-pengguna', [DetailPenggunaController::class, 'index'])->name
 Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
 
 
-Route::get('/kemenkeu-id/login', [\App\Http\Controllers\KemenkeuID\Login::class, 'login'])
+Route::get('/kemenkeu-id/login', [\App\Http\Controllers\Login::class, 'login'])
     ->name('kemenkeu-id.login');
-Route::get('/kemenkeu-id/callback', [\App\Http\Controllers\KemenkeuID\Login::class, 'callback'])
+Route::get('/kemenkeu-id/callback', [\App\Http\Controllers\Login::class, 'callback'])
     ->name('kemenkeu-id.callback');
-Route::get('kemenkeu-id/logout', [\App\Http\Controllers\KemenkeuID\Logout::class, 'logout'])
+Route::get('kemenkeu-id/logout', [\App\Http\Controllers\Logout::class, 'logout'])
     ->name('kemenkeu-id.logout');
 // Route::get('/', function () {
 //     return view('welcome');

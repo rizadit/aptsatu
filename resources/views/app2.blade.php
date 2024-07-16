@@ -103,7 +103,7 @@
 
 
     </main>
-
+ 
     <div class="modal fade" id="transparentModal" tabindex="-1" aria-labelledby="transparentModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

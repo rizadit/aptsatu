@@ -7,22 +7,22 @@
             <!--change to offline or busy as needed-->
           </div>
           <div class="nav-profile-text d-flex ml-0 mb-3 flex-column"> 
-            @auth
-            <span class="font-weight-semibold mb-1 mt-2 text-center">{{ Auth::user()->username }}</span>
+            
+            <span class="font-weight-semibold mb-1 mt-2 text-center">{{ session('user')->USERNAME }}</span>
             {{-- <span class="text-secondary icon-sm text-center">$3499.00</span> --}}
-            @endauth
+            
           </div>
         </a>
       </li>
       <li class="pt-2 pb-1">
         <span class="nav-item-head">Menu</span>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard') }}">
           <i class="mdi mdi-clipboard-text menu-icon"></i>
-          <span class="menu-title">Data Pengguna</span>          
+          <span class="menu-title">Dashboard</span>          
         </a>
-      </li>
+      </li> --}}
       <li class="nav-item">
         <a class="nav-link" href="{{ route('detail-pengguna') }}">
           <i class="mdi mdi-pencil-box-outline menu-icon"></i>
@@ -41,7 +41,7 @@
           <span class="menu-title">Survei Kepuasan</span>
         </a>
       </li>
-      @if(Auth::check() && !in_array(Auth::user()->role, ['petugas', 'kantor']))
+      @if (session('user')->ROLE != 'petugas' || session('user')->ROLE != 'kantor')
       <li class="nav-item">
         <a class="nav-link" href="#">
           <i class="mdi mdi-file-chart menu-icon"></i>

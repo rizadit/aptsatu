@@ -11097,7 +11097,8 @@ code {
     font-size: 13px; }
 
 .main-panel .content-wrapper .card-img {
-  background-image: url("/assets_pluginAdmin/images/bg_card.jpg");
+  /* background-image: url("/assets_pluginAdmin/images/bg_card.jpg"); */
+  background-image: url('/assets_pluginFront/assets/img/Background_Utama-01.png');
   background-size: cover; }
 
 .main-panel .content-wrapper .star-color {
@@ -14149,7 +14150,8 @@ dl {
   right: 30px;
   height: 45px;
   width: 45px;
-  background: #0033c4;
+  /* background: #0033c4; */
+  background: linear-gradient(-60deg,#0b4d21 8%,#0a4b20 49%,#1e6937 100%);
   z-index: 99;
   -webkit-box-shadow: 0px 0px 31px 6px rgba(0, 0, 0, 0.17);
   box-shadow: 0px 0px 31px 6px rgba(0, 0, 0, 0.17);
@@ -14204,8 +14206,9 @@ dl {
     padding-left: 24px;
     padding-right: 16px;
     width: calc(100% - 260px);
-    height: 60px;
-    background: #0033c4;
+    height: 80px;
+    /* background: #0033c4; */
+    background: linear-gradient(-60deg,#0b4d21 8%,#0a4b20 49%,#1e6937 100%);
     position: relative; }
     @media (max-width: 991px) {
       .navbar .navbar-menu-wrapper {
@@ -14216,9 +14219,10 @@ dl {
     .navbar .navbar-menu-wrapper .navbar-toggler {
       border: 0;
       color: #fff;
-      height: 60px;
+      height: 80px;
       width: 48px;
-      background: #dc3545;
+      /* background: #dc3545; */
+      background: linear-gradient(-60deg,#0b4d21 8%,#0a4b20 49%,#1e6937 100%);
       right: 100%;
       border-bottom-left-radius: 50px;
       border-top-left-radius: 50px;
@@ -14397,7 +14401,8 @@ dl {
 
 /* Navbar color variations */
 .navbar.navbar-primary .navbar-menu-wrapper {
-  background: #0033c4;
+  /* background: #0033c4; */
+  background: linear-gradient(-60deg,#0b4d21 8%,#0a4b20 49%,#1e6937 100%);
   color: #ffffff; }
   .navbar.navbar-primary .navbar-menu-wrapper .search-field .input-group input:-ms-input-placeholder {
     color: #ffffff; }
@@ -14671,7 +14676,9 @@ dl {
           border-top-left-radius: 50px;
           border-bottom-left-radius: 50px; }
       .sidebar .nav .nav-item:not(:nth-child(2)).active {
-        background: #1a55e3; }
+        /* background: #1a55e3;  */
+        background: linear-gradient(-60deg,#0b4d21 8%,#0a4b20 49%,#1e6937 100%);
+      }
         .sidebar .nav .nav-item:not(:nth-child(2)).active > .nav-link .menu-title {
           color: #ffffff;
           font-family: "Open Sans", sans-serif;

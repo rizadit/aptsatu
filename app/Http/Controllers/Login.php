@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\KemenkeuID;
+namespace App\Http\Controllers;
  
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
