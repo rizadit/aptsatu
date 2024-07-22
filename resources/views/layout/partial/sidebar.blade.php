@@ -8,7 +8,7 @@
           </div>
           <div class="nav-profile-text d-flex ml-0 mb-3 flex-column"> 
             
-            <span class="font-weight-semibold mb-1 mt-2 text-center">{{ session('user')->USERNAME }}</span>
+            <span class="font-weight-semibold mb-1 mt-2 text-center">{{ session('user')->USERNAME ?? session()->get('user-data')['nama'] }}</span>
             {{-- <span class="text-secondary icon-sm text-center">$3499.00</span> --}}
             
           </div>
@@ -41,7 +41,7 @@
           <span class="menu-title">Survei Kepuasan</span>
         </a>
       </li>
-      @if (session('user')->ROLE != 'petugas' || session('user')->ROLE != 'kantor')
+      {{-- @if (session('user')->ROLE != 'petugas' || session('user')->ROLE != 'kantor') --}}
       <li class="nav-item">
         <a class="nav-link" href="#">
           <i class="mdi mdi-file-chart menu-icon"></i>
@@ -54,6 +54,6 @@
           <span class="menu-title">Quality Assurance</span>
         </a>
       </li> 
-      @endif     
+      {{-- @endif      --}}
     </ul>
   </nav>

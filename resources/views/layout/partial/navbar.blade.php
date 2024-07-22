@@ -103,7 +103,7 @@
         </li> --}}
         <li class="nav-item nav-profile dropdown d-none d-md-block">
           <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-            <div class="nav-profile-text">{{ session('user')->USERNAME }} </div>
+            <div class="nav-profile-text">{{ session('user')->USERNAME ?? session()->get('user-data')['nama'] }}</div>
           </a>
           <div class="dropdown-menu center navbar-dropdown" aria-labelledby="profileDropdown">
             <a class="dropdown-item" data-toggle="modal" data-target="#editProfileModal">
@@ -145,11 +145,11 @@
                     @csrf
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" value="{{ session('user')->USERNAME }}" required>
+                        <input type="text" class="form-control" id="username" name="username" value="{{ session('user')->USERNAME ?? session()->get('user-data')['nama'] }}" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ session('user')->EMAIL }}" required>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ session('user')->EMAIL ?? session()->get('user-data')['nama'] }}" required>
                     </div>
                     <div class="form-group">
                         <label for="password">New Password</label>

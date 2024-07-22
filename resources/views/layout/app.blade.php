@@ -19,7 +19,9 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets_pluginAdmin/css/demo_1/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets_pluginAdmin/css/demo_1/dataTables.bootstrap4.css') }}" />
     {{-- <link rel="stylesheet" href="{{ asset('assets_pluginLanding/style.css') }}" /> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/8l44e7m1Qq1NcTtrP5hZGce/6F44MPH7Wai0kc" crossorigin="anonymous"></script>
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets_pluginAdmin/images/logo_djkn.png') }}" />
 </head>
@@ -76,29 +78,7 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="{{ asset('assets_pluginAdmin/vendors/js/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="{{ asset('assets_pluginAdmin/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/vendors/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/vendors/flot/jquery.flot.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/vendors/flot/jquery.flot.resize.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/vendors/flot/jquery.flot.categories.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/vendors/flot/jquery.flot.fillbetween.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/vendors/flot/jquery.flot.stack.js') }}"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="{{ asset('assets_pluginAdmin/js/off-canvas.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/js/misc.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/js/settings.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/js/todolist.js') }}"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="{{ asset('assets_pluginAdmin/js/dashboard.js') }}"></script>
-    <!-- End custom js for this page -->
+    
     
 </body>
 

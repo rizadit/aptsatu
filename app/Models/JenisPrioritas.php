@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RJenisKanal extends Model
+class JenisPrioritas extends Model
 {
     use HasFactory;
-    protected $table = 'R_JENISKANAL';
-    protected $primaryKey = 'ID_JENISKANAL';
+
+    protected $table = 'R_JENISPRIORITAS';
+    protected $primaryKey = 'ID_JENISPRIORITAS';
     public $timestamps = false;
 
     protected $fillable = [
-        'ID_JENISKANAL',
-        'URAIAN_JENISKANAL',
+        'ID_JENISPRIORITAS',
+        'URAIAN_JENISPRIORITAS',
     ];
 }
- 

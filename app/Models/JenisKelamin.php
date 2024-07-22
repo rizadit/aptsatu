@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RJenisKanal extends Model
+class JenisKelamin extends Model
 {
     use HasFactory;
-    protected $table = 'R_JENISKANAL';
-    protected $primaryKey = 'ID_JENISKANAL';
+
+    protected $table = 'R_JENISKELAMIN';
+    protected $primaryKey = 'ID_JENISKELAMIN';
     public $timestamps = false;
 
     protected $fillable = [
-        'ID_JENISKANAL',
-        'URAIAN_JENISKANAL',
+        'ID_JENISKELAMIN',
+        'URAIAN_JENISKELAMIN',
     ];
 }
- 

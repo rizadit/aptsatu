@@ -8,3 +8,4 @@
       <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"> </span>
     </div>
   </footer>
+  @include('layout.partial.footerjs')

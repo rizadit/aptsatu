@@ -4,6 +4,79 @@
 @section('content-section')
 @endsection
 @section('content')
+{{-- <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.css"> --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+    <style>
+        .modal-dialog {
+            max-width: 80%;
+        }
+
+        .modal-content {
+            height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-body {
+            max-height: calc(100vh - 210px);
+            overflow-y: auto;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #2c8b4b;
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            flex: 2;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f7f7e8;
+        }
+
+        .form-group select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: #2c8b4b;
+            color: white;
+        }
+
+        .form-group option {
+            background-color: white;
+            color: black;
+        }
+    </style>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -13,13 +86,13 @@
                         <p class="card-description"> Area Layanan Terpadu
                         </p>
                     </div>
-                    <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">                        
+                    <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
                         <button type="button" class="btn btn-primary mt-2 mt-sm-0 btn-icon-text">
                             <i class="mdi mdi-plus-circle"></i> Tambah Data </button>
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table id="order-listing" class="table">
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
@@ -28,118 +101,240 @@
                                 <th>Urgensi</th>
                                 <th>Subjek</th>
                                 <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>May 15, 2015</td>
-                                <td class="py-1">
-                                    <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
-                                </td>
-                                <td>Herman Beck</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%;"
-                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td>$ 77.99</td>
-                                <td>May 15, 2015</td>
-                            </tr>
-                            <tr>
-                                <td>May 15, 2015</td>
-                                <td class="py-1">
-                                    <img src="../../assets/images/faces-clipart/pic-2.png" alt="image" />
-                                </td>
-                                <td>Messsy Adam</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%;"
-                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td>$245.30</td>
-                                <td>July 1, 2015</td>
-                            </tr>
-                            <tr>
-                                <td>May 15, 2015</td>
-                                <td class="py-1">
-                                    <img src="../../assets/images/faces-clipart/pic-3.png" alt="image" />
-                                </td>
-                                <td>John Richards</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%;"
-                                            aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td>$138.00</td>
-                                <td>Apr 12, 2015</td>
-                            </tr>
-                            <tr>
-                                <td>May 15, 2015</td>
-                                <td class="py-1">
-                                    <img src="../../assets/images/faces-clipart/pic-4.png" alt="image" />
-                                </td>
-                                <td>Peter Meggik</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%;"
-                                            aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td>$ 77.99</td>
-                                <td>May 15, 2015</td>
-                            </tr>
-                            <tr>
-                                <td>May 15, 2015</td>
-                                <td class="py-1">
-                                    <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
-                                </td>
-                                <td>Edward</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 35%;"
-                                            aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td>$ 160.25</td>
-                                <td>May 03, 2015</td>
-                            </tr>
-                            <tr>
-                                <td>May 15, 2015</td>
-                                <td class="py-1">
-                                    <img src="../../assets/images/faces-clipart/pic-2.png" alt="image" />
-                                </td>
-                                <td>John Doe</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 65%;"
-                                            aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td>$ 123.21</td>
-                                <td>April 05, 2015</td>
-                            </tr>
-                            <tr>
-                                <td>May 15, 2015</td>
-                                <td class="py-1">
-                                    <img src="../../assets/images/faces-clipart/pic-3.png" alt="image" />
-                                </td>
-                                <td>Henry Tom</td>
-                                <td>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%;"
-                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </td>
-                                <td>$ 150.00</td>
-                                <td>June 16, 2015</td>
-                            </tr>
+                            @foreach ($layanans as $layanan)
+                                <tr>
+                                    <td>{{ $layanan->DIBUAT_TANGGAL }}</td>
+                                    <td>{{ $layanan->NO_ANTRIAN }}</td>
+                                    <td>{{ $layanan->NAMA_PENGUNJUNG }}</td>
+                                    <td>{{ $layanan->ID_JENISPRIORITAS }}</td>
+                                    <td>{{ $layanan->SUBJEK }}</td>
+                                    <td>
+                                        <label class="badge badge-danger">{{ $layanan->STATUS }}</label>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-outline-success detail-layanan"
+                                            data-id="{{ $layanan->ID_LAYANAN }}">Detail</button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Layanan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Data akan dimasukkan di sini oleh JavaScript -->
+                    <div class="card">
+                        <div class="card-body">
+                            <form class="form-sample">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <input type="email" class="form-control EMAIL" name="email"
+                                                    value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">No Telepon</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control TELEPON" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Nama</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control NAMA" name="nama"
+                                                    value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Subjek</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control SUBJEK" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Departemen</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control">
+                                                    @foreach ($departemen as $k)
+                                                        <option value="{{ $k->ID_JENISDEPARTEMEN }}">
+                                                            {{ $k->URAIAN_JENISDEPARTEMEN }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Kategori Layanan</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control">
+                                                    <option>${response.KATEGORI_LAYANAN || ''}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Kanal</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control KANAL">
+                                                    @foreach ($kanal as $k)
+                                                        <option value="{{ $k->ID_JENISKANAL }}">
+                                                            {{ $k->URAIAN_JENISKANAL }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Prioritas</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control KANAL">
+                                                    @foreach ($prioritas as $k)
+                                                        <option value="{{ $k->ID_JENISPRIORITAS }}">
+                                                            {{ $k->URAIAN_JENISPRIORITAS }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Jenis Tiket</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control">
+                                                    @foreach ($tiket as $k)
+                                                        <option value="{{ $k->ID_JENISTIKET }}">
+                                                            {{ $k->URAIAN_JENISTIKET }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Jenis Pengguna Layanan</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control">
+                                                    @foreach ($pengguna as $k)
+                                                        <option value="{{ $k->ID_JENISPENGGUNA }}">
+                                                            {{ $k->URAIAN_JENISPENGGUNA }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control">
+                                                    @foreach ($kelamin as $k)
+                                                        <option value="{{ $k->ID_JENISKELAMIN }}">
+                                                            {{ $k->URAIAN_JENISKELAMIN }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Detail Unit Kerja</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Inisial Agent</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Waktu Layanan Mulai</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Waktu Layanan Selesai</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Transkrip Percakapan</label>
+                                            <div class="col-sm-9">
+                                                <textarea name="content" id="editor"></textarea>
+                                                {{-- <div class="main-container">
+                                                    <div class="editor-container editor-container_document-editor editor-container_include-style" id="editor-container">
+                                                        <div class="editor-container__menu-bar" id="editor-menu-bar"></div>
+                                                        <div class="editor-container__toolbar" id="editor-toolbar"></div>
+                                                        <div class="editor-container__editor-wrapper">
+                                                            <div class="editor-container__editor"><div id="editor"></div></div>
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Pertanyaan</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Jawaban</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <label class="col-sm-3 col-form-label">Note</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+@section('section_js')
+{{-- <script type="importmap">
+    {
+        "imports": {
+            "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.js",
+            "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.1/"
+        }
+    }
+</script> --}}
+{{-- <script type="module" src="{{ asset('assets_pluginAdmin/js/ckeditorbaru.js') }}"></script> --}}
+<script>
+ ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+</script>
 @endsection

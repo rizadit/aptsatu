@@ -27,6 +27,7 @@ Route::get('/search', [PengunjungController::class, 'search'])->name('search');
 
 Route::get('/input', [InputDataLayananController::class, 'index'])->name('input');
 Route::get('/detail-pengguna', [DetailPenggunaController::class, 'index'])->name('detail-pengguna');
+Route::get('/detail/{id}', [DetailPenggunaController::class, 'getLayananDetail'])->name('detail');
 Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
 
 

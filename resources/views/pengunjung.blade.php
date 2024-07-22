@@ -73,10 +73,11 @@
                         <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
                             <h1>BUKU<br> Pengunjung</h1>
                             <p>Area Layanan Terpadu</p>
-                            <button class="btn bg-white text-dark font-12" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ session('user')->USERNAME }}</button>
+                            <button class="btn bg-white text-dark font-12"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ session('user')->USERNAME }}</button>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
-                            </form>  
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-6  d-flex flex-row align-items-center">
@@ -126,25 +127,16 @@
                                 <div class="form-group">
                                     <label for="INSTANSI?UNIT">Instansi / Unit</label>
                                     <div class="input-group">
-                                        <select class="js-example-basic-single" id="INSTANSI_UNIT" name="INSTANSI_UNIT" style="width: 100%;">
-                                            <option value="OP">Orang Perseorangan</option>
-                                            <option value="BH">Badan Hukum</option>
-                                            <option value="BP">Badan Publik</option>
-                                            <option value="OK">Organisasi Kemasyarakatan</option>                                            
+                                        <select class="js-example-basic-single" id="INSTANSI_UNIT" name="INSTANSI_UNIT"
+                                            style="width: 100%;">
+                                            @foreach ($jenisPengguna as $jenis)
+                                                <option value="{{ $jenis->ID_JENISPENGGUNA }}">
+                                                    {{ $jenis->URAIAN_JENISPENGGUNA }}</option>
+                                            @endforeach
                                         </select>
-                                        {{-- <input type="text" class="form-control form-control-lg border-left-0"
-                                            id="INSTANSI_UNIT" name="INSTANSI_UNIT" placeholder="INSTANSI / UNIT"> --}}
                                     </div>
                                 </div>
-                                {{-- <div class="my-2 d-flex justify-content-between align-items-center">
-                                    <div class="form-check">
-                                        <label class="form-check-label text-muted">
-                                            <input type="checkbox" class="form-check-input"> Keep me signed in </label>
-                                    </div>
-                                    <a href="#" class="auth-link text-black">Forgot password?</a>
-                                </div> --}}
                                 <div class="my-3 d-grid gap-2 ">
-                                    {{-- <button class="btn btn-rounded btn-success">Cari</button> --}}
                                     <button type="submit"
                                         class="btn btn-block btn-success btn-lg fw-semibold auth-form-btn">Submit
                                     </button>
@@ -164,11 +156,17 @@
     <script>
         @if (session('success'))
             Swal.fire({
-                title: 'Success!',
-                text: '{{ session('success') }}',
-                icon: 'success',
-                confirmButtonText: 'OK'
+                title: 'Terima kasih',
+                html: `Nomor Antrian Bapak/Ibu adalah<br><br><strong style="display: inline-block; padding: 10px 20px; background-color: #00d284; color: white; font-size: 24px;">{{ session('no_antrian') }}</strong><br><br>Mohon menunggu, Petugas Layanan kami akan segera melayani sesuai antrean`,
+                confirmButtonText: 'TUTUP',
+                confirmButtonColor: '#FFC107'
             });
+            // Swal.fire({
+            //     title: 'Terima kasih',
+            //     text: '{{ session('success') }}, {{ session('no_antrian') }}',
+            //     icon: 'success',
+            //     confirmButtonText: 'OK'
+            // });
         @endif
     </script>
     <script>
@@ -188,7 +186,8 @@
                             $('#NIK').val(response.data.NIP_NIK);
                             $('#NAMA').val(response.data.NAMA);
                             $('#EMAIL').val(response.data.EMAIL);
-                            $('#INSTANSI_UNIT').val(response.data.INSTANSI_UNIT).trigger('change');
+                            $('#INSTANSI_UNIT').val(response.data.INSTANSI_UNIT).trigger(
+                                'change');
                         } else {
                             // alert('No data found');
                             Swal.fire({
@@ -200,7 +199,7 @@
                         }
                     }
                 });
-            });
+            }); 
         });
     </script>
     <!-- container-scroller -->

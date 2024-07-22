@@ -32,7 +32,8 @@
             <div class="card-body d-flex align-items-center">
                 <row>
                     <div class="text-white">
-                        <p class="round3">Halo <b>{{ session('user')->USERNAME }}</b>, Selamat Datang di</p>                        
+                        <p class="round3">Halo 
+                            <b>{{ session('user')->USERNAME ?? session()->get('user-data')['nama'] }}</b>, Selamat Datang di</p>                        
                     </div>
                     <div class="text-white">
                         <h1>INTEGRATED<br> SUPPORT<br> SERVICE</h1>

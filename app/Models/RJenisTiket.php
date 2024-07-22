@@ -9,8 +9,9 @@ class RJenisTiket extends Model
 {
     use HasFactory;
 
-    protected $table = 'r_jenis_tiket';
-    protected $primaryKey = 'ID_JENIS_TIKET';
-    protected $fillable = ['JENIS_TIKET', 'URAIAN_JENIS_TIKET'];
-    public $timestamps = true;
+    protected $table = 'R_JENISTIKET';
+    protected $primaryKey = 'ID_JENISTIKET';
+    protected $fillable = ['ID_JENISTIKET', 'URAIAN_JENISTIKET'];
+    
 }
+ 
