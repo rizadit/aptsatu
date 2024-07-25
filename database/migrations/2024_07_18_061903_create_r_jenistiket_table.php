@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text('URAIAN_JENISTIKET')->nullable();
         });
     }
-
+ 
     /**
      * Reverse the migrations.
      */

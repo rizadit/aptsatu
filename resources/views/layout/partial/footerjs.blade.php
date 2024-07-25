@@ -31,32 +31,33 @@ src="https://demo.bootstrapdash.com/plus-admin/themes/assets/vendors/datatables.
 
 <script>
     $(document).ready(function() {
-        $('.detail-layanan').on('click', function() {
-            var id = $(this).data('id'); // Ensure you have data-id attribute in your button or element
-            $.ajax({
-                url: '{{ route('detail', '') }}/' + id,
-                type: 'GET',
-                success: function(response) {
-                    $('.EMAIL').val(response[0].EMAIL);
-                    $('.TELEPON').val(response[0].TELEPON);
-                    $('.NAMA').val(response[0].NAMA);
-                    $('.SUBJEK').val(response[0].SUBJEK);
-                    $('.KANAL').val(response[0].KANAL).trigger(
-                        'change');
+    //     $('.detail-layanan').on('click', function() {
+    //         var id = $(this).data('id'); // Ensure you have data-id attribute in your button or element
+    //         $.ajax({
+    //             url: '{{ route('detail', '') }}/' + id,
+    //             type: 'GET',
+    //             success: function(response) {
+    //                 $('.ID_LAYANAN').val(response[0].ID_LAYANAN);
+    //                 $('.EMAIL').val(response[0].EMAIL);
+    //                 $('.TELEPON').val(response[0].TELEPON);
+    //                 $('.NAMA').val(response[0].NAMA);
+    //                 $('.SUBJEK').val(response[0].SUBJEK);
+    //                 $('.KANAL').val(response[0].KANAL).trigger(
+    //                     'change');
                         
-                        //$('#detailModal .modal-body').html(modalBody);
-                        $('#detailModal').modal('show');
-                    },
-            error: function(xhr) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Gagal mengambil data',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-            }
-        });
-    });
+    //                     //$('#detailModal .modal-body').html(modalBody);
+    //                     $('#detailModal').modal('show');
+    //                 },
+    //         error: function(xhr) {
+    //             Swal.fire({
+    //                 title: 'Error!',
+    //                 text: 'Gagal mengambil data',
+    //                 icon: 'error',
+    //                 confirmButtonText: 'OK'
+    //             });
+    //         }
+    //     });
+    // });
 });
 
 

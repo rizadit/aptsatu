@@ -25,9 +25,19 @@ Route::post('/profile', [ProfileController::class, 'update'])->name('profile.upd
 Route::resource('/pengunjung', \App\Http\Controllers\PengunjungController::class);
 Route::get('/search', [PengunjungController::class, 'search'])->name('search');
 
+Route::get('/kategorilayanan', [DetailPenggunaController::class, 'getCustomFields'])->name('kategorilayanan');
+Route::get('/get-jenis-layanan/{departemen_id}', [DetailPenggunaController::class, 'getJenisLayanan']);
+Route::post('/layanan/update', [DetailPenggunaController::class, 'update'])->name('layanan.update');
+// Route::get('/get-token', [DetailPenggunaController::class, 'getToken'])->name('get-token');
+// Route::get('/ticket-custom-fields', [DetailPenggunaController::class, 'getTicketCustomFields'])->name('ticket-custom-fields');
+// Route::get('/token-view', function () {
+//     return view('token');
+// });
+
 Route::get('/input', [InputDataLayananController::class, 'index'])->name('input');
 Route::get('/detail-pengguna', [DetailPenggunaController::class, 'index'])->name('detail-pengguna');
-Route::get('/detail/{id}', [DetailPenggunaController::class, 'getLayananDetail'])->name('detail');
+// Route::get('/detail/{id}', [DetailPenggunaController::class, 'getLayananDetail'])->name('detail');
+Route::get('/detail', [DetailPenggunaController::class, 'getLayananDetail'])->name('detail');
 Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
 
 

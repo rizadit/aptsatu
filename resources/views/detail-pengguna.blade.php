@@ -4,79 +4,10 @@
 @section('content-section')
 @endsection
 @section('content')
-{{-- <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.css"> --}}
-<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-    <style>
-        .modal-dialog {
-            max-width: 80%;
-        }
-
-        .modal-content {
-            height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-body {
-            max-height: calc(100vh - 210px);
-            overflow-y: auto;
-        }
-
-        .card {
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header {
-            background-color: #2c8b4b;
-            color: white;
-            padding: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            flex: 2;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #f7f7e8;
-        }
-
-        .form-group select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-color: #2c8b4b;
-            color: white;
-        }
-
-        .form-group option {
-            background-color: white;
-            color: black;
-        }
-    </style>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="{{ asset('assets_pluginLanding/css/formStyle.css') }}" rel="stylesheet" />
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -109,8 +40,8 @@
                                 <tr>
                                     <td>{{ $layanan->DIBUAT_TANGGAL }}</td>
                                     <td>{{ $layanan->NO_ANTRIAN }}</td>
-                                    <td>{{ $layanan->NAMA_PENGUNJUNG }}</td>
-                                    <td>{{ $layanan->ID_JENISPRIORITAS }}</td>
+                                    <td>{{ $layanan->NAMA }}</td>
+                                    <td>{{ $layanan->URAIAN_JENISPRIORITAS }}</td>
                                     <td>{{ $layanan->SUBJEK }}</td>
                                     <td>
                                         <label class="badge badge-danger">{{ $layanan->STATUS }}</label>
@@ -142,42 +73,49 @@
                     <!-- Data akan dimasukkan di sini oleh JavaScript -->
                     <div class="card">
                         <div class="card-body">
-                            <form class="form-sample">
+                            <form id="updateLayananForm" class="form-sample updateLayananForm">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Email</label>
                                             <div class="col-sm-9">
-                                                <input type="email" class="form-control EMAIL" name="email"
-                                                    value="" />
+                                                <input style="height:10px;" type="email" class="form-control EMAIL"
+                                                    name="EMAIL" value="" />
+                                                <input name="ID_LAYANAN" style="height:10px;" type="hidden"
+                                                    class="form-control ID_LAYANAN" style="height:10px;">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">No Telepon</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control TELEPON" value="" />
+                                                <input style="height:10px;" type="text" class="form-control TELEPON"
+                                                    name="TELEPON" value="" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Nama</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control NAMA" name="nama"
-                                                    value="" />
+                                                <input style="height:10px;" type="text" class="form-control NAMA"
+                                                    name="NAMA" value="" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Subjek</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control SUBJEK" value="" />
+                                                <input style="height:10px;" type="text" class="form-control SUBJEK"
+                                                    name="SUBJEK" value="" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Departemen</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control">
+                                                <select name="ID_JENISDEPARTEMEN" class="form-control DEPARTEMEN"
+                                                    style="height:35px;" id="departemen">
+                                                    <option value="">Select Department</option>
                                                     @foreach ($departemen as $k)
-                                                        <option value="{{ $k->ID_JENISDEPARTEMEN }}">
-                                                            {{ $k->URAIAN_JENISDEPARTEMEN }}</option>
+                                                        <option value="{{ $k->ID_DEPARTEMEN }}">{{ $k->URAIAN_DEPARTEMEN }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -185,15 +123,18 @@
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Kategori Layanan</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control">
-                                                    <option>${response.KATEGORI_LAYANAN || ''}</option>
+                                                <select name="ID_JENISLAYANAN"
+                                                    class="form-control custom-fields-select JENISLAYANAN"
+                                                    style="height:35px;" id="jenislayanan">
+                                                    <option value="">Select Jenis Layanan</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Kanal</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control KANAL">
+                                                <select name="ID_JENISKANAL" class="form-control KANAL"
+                                                    style="height:35px;">
                                                     @foreach ($kanal as $k)
                                                         <option value="{{ $k->ID_JENISKANAL }}">
                                                             {{ $k->URAIAN_JENISKANAL }}</option>
@@ -204,7 +145,8 @@
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Prioritas</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control KANAL">
+                                                <select name="ID_JENISPRIORITAS" class="form-control PRIORITAS"
+                                                    style="height:35px;">
                                                     @foreach ($prioritas as $k)
                                                         <option value="{{ $k->ID_JENISPRIORITAS }}">
                                                             {{ $k->URAIAN_JENISPRIORITAS }}</option>
@@ -215,7 +157,8 @@
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Jenis Tiket</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control">
+                                                <select name="ID_JENISTIKET" class="form-control TIKET"
+                                                    style="height:35px;">
                                                     @foreach ($tiket as $k)
                                                         <option value="{{ $k->ID_JENISTIKET }}">
                                                             {{ $k->URAIAN_JENISTIKET }}</option>
@@ -226,7 +169,8 @@
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Jenis Pengguna Layanan</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control">
+                                                <select name="ID_JENISPENGGUNA" class="form-control PENGGUNA"
+                                                    style="height:35px;">
                                                     @foreach ($pengguna as $k)
                                                         <option value="{{ $k->ID_JENISPENGGUNA }}">
                                                             {{ $k->URAIAN_JENISPENGGUNA }}</option>
@@ -237,7 +181,8 @@
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control">
+                                                <select name="ID_JENISKELAMIN" class="form-control KELAMIN"
+                                                    style="height:35px;">
                                                     @foreach ($kelamin as $k)
                                                         <option value="{{ $k->ID_JENISKELAMIN }}">
                                                             {{ $k->URAIAN_JENISKELAMIN }}</option>
@@ -248,25 +193,35 @@
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Detail Unit Kerja</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="" />
+                                                <input name="DETAIL_UNITKERJA" style="height:10px;" type="text"
+                                                    class="form-control UNITKERJA" value="" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Inisial Agent</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="" />
+                                                <input name="INITIAL_AGENT" style="height:10px;" type="text"
+                                                    class="form-control INITIALAGENT" value="" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Waktu Layanan Mulai</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="" />
+                                                <input type="checkbox" class="form-check-input timeInput1"
+                                                    value="" />
+                                                <input name="WAKTU_LAYANAN_MULAI" style="height:10px;" type="text"
+                                                    class="form-control inputin MULAI" value="" readonly />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Waktu Layanan Selesai</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="" />
+                                                {{-- <input type="checkbox" class="timeInput"/> <input style="height:10px;" type="text" class="form-control inputout " value="" readonly/> --}}
+                                                <input type="checkbox" class="form-check-input timeInput2"
+                                                    value="" />
+                                                <input name="WAKTU_LAYANAN_SELESAI" style="height:10px;" type="text"
+                                                    class="form-control inputout SELESAI" value="" readonly />
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -274,36 +229,52 @@
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Transkrip Percakapan</label>
                                             <div class="col-sm-9">
-                                                <textarea name="content" id="editor"></textarea>
-                                                {{-- <div class="main-container">
-                                                    <div class="editor-container editor-container_document-editor editor-container_include-style" id="editor-container">
-                                                        <div class="editor-container__menu-bar" id="editor-menu-bar"></div>
-                                                        <div class="editor-container__toolbar" id="editor-toolbar"></div>
-                                                        <div class="editor-container__editor-wrapper">
-                                                            <div class="editor-container__editor"><div id="editor"></div></div>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
+                                                <div id="editor-container">
+                                                    {{-- <textarea name="TRANSKRIP" id="editor-container"> --}}
+                                                    Yth, Bapak Jeffry
+
+                                                    Terima Kasih telah mengunjungi Area Pelayanan Terpadu kantor Pusat DJKN.
+                                                    Berikut kami sampaikan riwayat percakapan dari layanan yang telah
+                                                    diberikan.
+
+                                                    Unit Kerja/Perorangan : Jeffry
+
+                                                    Rangkuman Pertanyaan/Permasalahan : Permohonan Kutipan Risalah Lelang
+
+                                                    Rangkuman Jawaban : Berkas kutipan telah dipenuhi dan segera
+                                                    ditindaklanjuti
+
+                                                    Demikian informasi ini kami sampaikan semoga dapat membantu Bapak/Ibu.
+                                                    Kemudian sebagai bahan evaluasi atas kualitas layanan kami, mohon
+                                                    perkenan
+                                                    Bapak/Ibu untuk dapat memberikan feedback atas penyampaian jawaban kami.
+                                                    terima kasih telah menghubungi layanan HaloDJKN dan selamat beraktivitas
+                                                    kembali.
+                                                    {{-- </textarea> --}}
+                                                </div>
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Pertanyaan</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="" />
+                                                <input name="PERTANYAAN" type="text" class="form-control PERTANYAAN"
+                                                    value="" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Jawaban</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="" />
+                                                <input name="JAWABAN" type="text" class="form-control JAWABAN"
+                                                    value="" />
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="row">
                                             <label class="col-sm-3 col-form-label">Note</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" value="" />
+                                                <input name="NOTE" type="text" class="form-control NOTE"
+                                                    value="" />
                                             </div>
                                         </div>
                                     </div>
@@ -313,6 +284,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" form="updateLayananForm">Simpan Data</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Kirim Tiket</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -321,20 +294,332 @@
 
 @endsection
 @section('section_js')
-{{-- <script type="importmap">
-    {
-        "imports": {
-            "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.js",
-            "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.1/"
-        }
-    }
-</script> --}}
-{{-- <script type="module" src="{{ asset('assets_pluginAdmin/js/ckeditorbaru.js') }}"></script> --}}
-<script>
- ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-</script>
+    <script>
+        var toolbarOptions = [
+            ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+            ['blockquote', 'code-block'],
+
+            [{
+                'script': 'sub'
+            }, {
+                'script': 'super'
+            }], // superscript/subscript
+            [{
+                'indent': '-1'
+            }, {
+                'indent': '+1'
+            }], // outdent/indent
+            [{
+                'direction': 'rtl'
+            }], // text direction
+
+            [{
+                'size': ['small', false, 'large', 'huge']
+            }], // custom dropdown
+
+            [{
+                'align': []
+            }], // add align dropdown
+
+            ['clean'] // remove formatting button
+        ];
+
+        var quill = new Quill('#editor-container', {
+            theme: 'snow',
+            modules: {
+                toolbar: toolbarOptions
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            var now = new Date();
+            var hours = String(now.getHours()).padStart(2, '0');
+            var minutes = String(now.getMinutes()).padStart(2, '0');
+            var seconds = String(now.getSeconds()).padStart(2, '0');
+            var currentTime = hours + ':' + minutes + ':' + seconds;
+            $('.inputin').val(currentTime);
+            $('.timeInput1').change(function() {
+                if (this.checked) {
+                    $('.inputin').val(currentTime);
+                } else {
+                    $('.inputin').val('');
+                }
+            });
+
+            $('.timeInput2').change(function() {
+                if (this.checked) {
+                    $('.inputout').val(currentTime);
+                } else {
+                    $('.inputout').val('');
+                }
+            });
+
+            $('.DEPARTEMEN').on('change', function() {
+                var departemenID = $(this).val();
+                // alert('ets');
+                if (departemenID) {
+                    $.ajax({
+                        url: '/get-jenis-layanan/' + departemenID,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $('.JENISLAYANAN').empty();
+                            $('.JENISLAYANAN').append(
+                                '<option value="">Select Jenis Layanan</option>');
+                            $.each(data, function(key, value) {
+                                $('.JENISLAYANAN').append('<option value="' + value
+                                    .ID_JENISLAYANAN + '">' + value
+                                    .URAIAN_JENISLAYANAN + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('.JENISLAYANAN').empty();
+                    $('.JENISLAYANAN').append('<option value="">Select Jenis Layanan</option>');
+                }
+            });
+
+            $('.updateLayananForm').on('submit', function(e) {
+                e.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: "{{ route('layanan.update') }}",
+                    type: "POST",
+                    data: formData,
+                    success: function(response) {
+                        // alert(response.success);
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            text: response.success,
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Menutup modal dan menyegarkan halaman
+                                $('#detailModal').modal(
+                                'hide'); // Ganti #myModal dengan ID modal Anda
+                                location.reload();
+                            }
+                        });
+                    },
+                    error: function(xhr) {
+                        // alert('Gagal memperbarui data layanan.');
+                        let errorMessage = 'Gagal memperbarui data layanan.';
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMessage = xhr.responseJSON.error;
+                        }
+
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: errorMessage,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            });
+
+            $('.detail-layanan').on('click', function() {
+                var id = $(this).data('id');
+
+                $.ajax({
+                    url: '{{ route('detail') }}',
+                    type: 'GET',
+                    data: {
+                        ID_LAYANAN: id
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Isi field form dengan data dari respons
+                            $('.ID_LAYANAN').val(response.data.ID_LAYANAN || '');
+                            $('.EMAIL').val(response.data.EMAIL || '');
+                            $('.TELEPON').val(response.data.TELEPON || '');
+                            $('.NAMA').val(response.data.NAMA || '');
+                            $('.SUBJEK').val(response.data.SUBJEK || '');
+
+                            // Mengatur nilai dropdown jika data ada, jika tidak, atur ke kosong
+                            if (response.data.ID_JENISDEPARTEMEN) {
+                                $('.DEPARTEMEN').val(response.data.ID_JENISDEPARTEMEN).trigger(
+                                    'change');
+                            } else {
+                                $('.DEPARTEMEN').val('').trigger('change');
+                            }
+
+                            if (response.data.ID_JENISLAYANAN) {
+                                $.ajax({
+                                    url: '/get-jenis-layanan/' + response.data
+                                        .ID_JENISDEPARTEMEN,
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        $('.JENISLAYANAN').empty();
+                                        $('.JENISLAYANAN').append(
+                                            '<option value="">Select Jenis Layanan</option>'
+                                        );
+                                        $.each(data, function(key, value) {
+                                            if (response.data
+                                                .ID_JENISLAYANAN === value
+                                                .ID_JENISLAYANAN) {
+                                                $('.JENISLAYANAN').append(
+                                                    '<option selected value="' +
+                                                    value
+                                                    .ID_JENISLAYANAN +
+                                                    '">' + value
+                                                    .URAIAN_JENISLAYANAN +
+                                                    '</option>');
+                                            } else {
+                                                $('.JENISLAYANAN').append(
+                                                    '<option value="' +
+                                                    value
+                                                    .ID_JENISLAYANAN +
+                                                    '">' + value
+                                                    .URAIAN_JENISLAYANAN +
+                                                    '</option>');
+                                            }
+
+                                        });
+                                    }
+                                });
+                                // alert(response.data.ID_JENISLAYANAN);
+
+                            } else {
+                                $('.JENISLAYANAN').val('').trigger('change');
+                            }
+
+                            if (response.data.ID_JENISKANAL) {
+                                $('.KANAL').val(response.data.ID_JENISKANAL).trigger(
+                                    'change');
+                            } else {
+                                $('.KANAL').val('').trigger('change');
+                            }
+
+                            if (response.data.ID_JENISPRIORITAS) {
+                                $('.PRIORITAS').val(response.data.ID_JENISPRIORITAS).trigger(
+                                    'change');
+                            } else {
+                                $('.PRIORITAS').val('').trigger('change');
+                            }
+
+                            if (response.data.ID_JENISTIKET) {
+                                $('.TIKET').val(response.data.ID_JENISTIKET).trigger('change');
+                            } else {
+                                $('.TIKET').val('').trigger('change');
+                            }
+
+                            if (response.data.ID_JENISPENGGUNA) {
+                                $('.PENGGUNA').val(response.data.ID_JENISPENGGUNA).trigger(
+                                    'change');
+                            } else {
+                                $('.PENGGUNA').val('').trigger('change');
+                            }
+
+                            if (response.data.ID_JENISKELAMIN) {
+                                $('.KELAMIN').val(response.data.ID_JENISKELAMIN).trigger(
+                                    'change');
+                            } else {
+                                $('.KELAMIN').val('').trigger('change');
+                            }
+
+                            $('.UNITKERJA').val(response.data.DETAIL_UNITKERJA || '');
+                            $('.INITIALAGENT').val(response.data.INITIAL_AGENT || '');
+                            $('.MULAI').val(response.data.WAKTU_LAYANAN_MULAI || '');
+                            $('.SELESAI').val(response.data.WAKTU_LAYANAN_SELESAI || '');
+                            $('.PERTANYAAN').val(response.data.PERTANYAAN || '');
+                            $('.JAWABAN').val(response.data.JAWABAN || '');
+                            $('.NOTE').val(response.data.NOTE || '');
+
+                            // Tampilkan modal
+                            $('#detailModal').modal('show');
+                        } else {
+                            // Tampilkan alert jika tidak ada data
+                            Swal.fire({
+                                title: 'Data Belum ada!',
+                                text: response.message,
+                                icon: 'info',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    },
+                    error: function() {
+                        // Tangani error AJAX
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Terjadi masalah saat mengambil data.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            });
+
+            // $('.detail-layanan').click(function() {
+            //     $.ajax({
+            //         url: '{{ route('kategorilayanan') }}',
+            //         method: 'GET',
+            //         success: function(response) {
+            //             let customFields = response.data;
+            //             let selectHtml = '<option value="">Select a Custom Field</option>';
+
+            //             if (customFields && customFields.length > 0) {
+            //                 customFields.forEach(function(field) {
+            //                     selectHtml += `<option value="${field.id}">${field.name} (${field.type})</option>`;
+            //                 });
+            //             } else {
+            //                 selectHtml += '<option value="">No custom fields found.</option>';
+            //             }
+
+            //             $('.custom-fields-select').html(selectHtml);
+            //         },
+            //         error: function(error) {
+            //             console.error('Error fetching custom fields:', error);
+            //             $('.custom-fields-select').html('<option value="">Failed to load custom fields.</option>');
+            //         }
+            //     });
+            // });
+
+            // $.ajax({
+            //     url: '/ticket-custom-fields',
+            //     type: 'GET',
+            //     success: function(response) {
+            //         if (response.httpCode === 200) {
+            //             // Assuming the response contains an array of departments
+            //             var departments = response.response.data;
+            //             var $departemen = $('#departemen');
+
+            //             $departemen.empty();
+            //             $departemen.append('<option value="">Select Department</option>');
+
+            //             $.each(departments, function(index, department) {
+            //                 if (department.id == 758) {
+            //                     $.each(department.choices, function(index, choices) {
+            //                         $departemen.append('<option value="' + choices.id + '">' + choices.title + '</option>');
+            //                     console.log(choices);
+            //                     });
+
+            //                 }
+            //             });
+
+            //         } else {
+            //             $('#tittle-departemen').html('Failed to retrieve data');
+            //         }
+            //     },
+            //     error: function() {
+            //         $('#tittle-departemen').html('An error occurred');
+            //     }
+            // });
+
+            // $('#departemen').change(function() {
+            //     var selectedDepartment = $(this).val();
+            //     var selectedText = $('#departemen option:selected').text();
+
+            //     // Display the selected department title
+            //     $('#tittle-departemen').html(selectedText);
+            // });
+
+        });
+    </script>
+
 @endsection

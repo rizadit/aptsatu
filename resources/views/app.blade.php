@@ -17,6 +17,7 @@
         type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{ asset('assets_pluginLanding/css/styles.css') }}" rel="stylesheet" />
+    
 </head>
 
 <body id="page-top">
