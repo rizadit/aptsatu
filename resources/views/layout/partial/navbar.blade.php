@@ -103,7 +103,7 @@
         </li> --}}
         <li class="nav-item nav-profile dropdown d-none d-md-block">
           <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-            <div class="nav-profile-text">{{ session('user')->USERNAME ?? session()->get('user-data')['nama'] }}</div>
+            <div class="nav-profile-text">{{ session('user')->USERNAME ?? session()->get('user-data')['nama'] }}{{ session()->get('user-data')['kode_organisasi'] }}</div>
           </a>
           <div class="dropdown-menu center navbar-dropdown" aria-labelledby="profileDropdown">
             <a class="dropdown-item" data-toggle="modal" data-target="#editProfileModal">

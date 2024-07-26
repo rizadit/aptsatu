@@ -35,14 +35,14 @@ class DetailPenggunaController extends Controller
             ->leftJoin('R_JENISPENGGUNA', 'T_LAYANAN.ID_JENISPENGGUNA', '=', 'R_JENISPENGGUNA.ID_JENISPENGGUNA')
             ->leftJoin('R_JENISKELAMIN', 'T_LAYANAN.ID_JENISKELAMIN', '=', 'R_JENISKELAMIN.ID_JENISKELAMIN')
             ->select(
-                'T_LAYANAN.*', 
-                'R_PENGUNJUNG.*', 
-                'r_departemen.*', 
-                'R_JENISLAYANAN.*', 
-                'R_JENISKANAL.*', 
-                'R_JENISPRIORITAS.*', 
-                'R_JENISTIKET.*', 
-                'R_JENISPENGGUNA.*', 
+                'T_LAYANAN.*',
+                'R_PENGUNJUNG.*',
+                'r_departemen.*',
+                'R_JENISLAYANAN.*',
+                'R_JENISKANAL.*',
+                'R_JENISPRIORITAS.*',
+                'R_JENISTIKET.*',
+                'R_JENISPENGGUNA.*',
                 'R_JENISKELAMIN.*'
             )
             ->get();
@@ -74,26 +74,99 @@ class DetailPenggunaController extends Controller
             ->leftJoin('R_JENISPENGGUNA', 'T_LAYANAN.ID_JENISPENGGUNA', '=', 'R_JENISPENGGUNA.ID_JENISPENGGUNA')
             ->leftJoin('R_JENISKELAMIN', 'T_LAYANAN.ID_JENISKELAMIN', '=', 'R_JENISKELAMIN.ID_JENISKELAMIN')
             ->select(
-                'T_LAYANAN.*', 
-                'R_PENGUNJUNG.*', 
-                'r_departemen.*', 
-                'R_JENISLAYANAN.*', 
-                'R_JENISKANAL.*', 
-                'R_JENISPRIORITAS.*', 
-                'R_JENISTIKET.*', 
-                'R_JENISPENGGUNA.*', 
+                'T_LAYANAN.*',
+                'R_PENGUNJUNG.*',
+                'r_departemen.*',
+                'R_JENISLAYANAN.*',
+                'R_JENISKANAL.*',
+                'R_JENISPRIORITAS.*',
+                'R_JENISTIKET.*',
+                'R_JENISPENGGUNA.*',
                 'R_JENISKELAMIN.*'
             )
             ->where('T_LAYANAN.ID_LAYANAN', $ID_LAYANAN)
             ->first();
 
-        
+
         // Jika data tidak ditemukan, kembalikan respons dengan pesan
         if (!$data) {
             return response()->json(['success' => false, 'message' => 'Data tidak ditemukan']);
         }
 
         return response()->json(['success' => true, 'data' => $data]);
+    }
+
+    public function tambah(Request $request)
+    {
+        $request->validate([
+            // 'ID_LAYANAN' => 'required|integer',
+            // 'NO_ANTRIAN' => 'required|string',
+            // 'ID_PENGUNJUNG' => 'required|integer',
+            'SUBJEK' => 'required|string',
+            'ID_JENISDEPARTEMEN' => 'required|integer',
+            'ID_JENISLAYANAN' => 'required|integer',
+            'ID_JENISKANAL' => 'required|integer',
+            'ID_JENISPRIORITAS' => 'required|integer',
+            'ID_JENISTIKET' => 'required|integer',
+            'ID_JENISPENGGUNA' => 'required|integer',
+            'ID_JENISKELAMIN' => 'required|integer',
+            'DETAIL_UNITKERJA' => 'nullable|string',
+            'INITIAL_AGENT' => 'nullable|string',
+            // 'WAKTU_LAYANAN_MULAI' => 'nullable|datetime',
+            // 'WAKTU_LAYANAN_SELESAI' => 'nullable|datetime',
+            // 'PERTANYAAN' => 'nullable|string',
+            // 'JAWABAN' => 'nullable|string',
+            // 'NOTE' => 'nullable|string',
+            // 'STATUS' => 'required|boolean',
+            // 'DIBUAT_OLEH' => 'nullable|string',
+            // 'DIBUAT_TANGGAL' => 'nullable|datetime',
+        ]);
+        $today = now()->toDateString();
+        $lastAntrian = LayananModel::whereDate('DIBUAT_TANGGAL', $today)
+            ->orderBy('ID_LAYANAN', 'desc')
+            ->first();
+        $newAntrianNumber = $lastAntrian ? $lastAntrian->NO_ANTRIAN + 1 : 1;
+
+        $pengunjung = PengunjungModel::create([
+            'TELEPON' => $request->TELEPON,
+            'NIP_NIK' => $request->NIP_NIK,
+            'NAMA' => $request->NAMA,
+            'EMAIL' => $request->EMAIL,
+            'INSTANSI_UNIT' => $request->ID_JENISPENGGUNA,
+            'ID_KANTOR' => $request->ID_KANTOR
+        ]);
+
+        $layanan = new LayananModel();
+        $layanan->ID_LAYANAN = null;
+        $layanan->NO_ANTRIAN = $newAntrianNumber;
+        $layanan->ID_PENGUNJUNG = $pengunjung->ID_PENGUNJUNG;
+        $layanan->SUBJEK = $request->SUBJEK;
+        $layanan->ID_JENISDEPARTEMEN = $request->ID_JENISDEPARTEMEN;
+        $layanan->ID_JENISLAYANAN = $request->ID_JENISLAYANAN;
+        $layanan->ID_JENISKANAL = $request->ID_JENISKANAL;
+        $layanan->ID_JENISPRIORITAS = $request->ID_JENISPRIORITAS;
+        $layanan->ID_JENISTIKET = $request->ID_JENISTIKET;
+        $layanan->ID_JENISPENGGUNA = $request->ID_JENISPENGGUNA;
+        $layanan->ID_JENISKELAMIN = $request->ID_JENISKELAMIN;
+        $layanan->DETAIL_UNITKERJA = $request->DETAIL_UNITKERJA;
+        $layanan->INITIAL_AGENT = $request->INITIAL_AGENT;
+        $layanan->WAKTU_LAYANAN_MULAI = $request->WAKTU_LAYANAN_MULAI;
+        $layanan->WAKTU_LAYANAN_SELESAI = $request->WAKTU_LAYANAN_SELESAI;
+        $layanan->PERTANYAAN = $request->PERTANYAAN;
+        $layanan->JAWABAN = $request->JAWABAN;
+        $layanan->NOTE = $request->NOTE;
+        $layanan->STATUS = null;
+        $layanan->DIBUAT_OLEH = null;
+        $layanan->DIBUAT_TANGGAL = now();
+        $layanan->ID_KANTOR = $request->ID_KANTOR;
+        $layanan->TRANSKRIP = $request->TRANSKRIP;
+
+
+        // Menyimpan entri baru ke database
+        $layanan->save();
+
+        return response()->json(['success' => 'Data layanan berhasil ditambahkan.']);
+        // return response()->json(['error' => 'Data layanan tidak ditemukan.'], 404);
     }
 
     public function update(Request $request)
@@ -129,5 +202,5 @@ class DetailPenggunaController extends Controller
         }
 
         return response()->json(['error' => 'Data layanan tidak ditemukan.'], 404);
-    }    
+    }
 }

@@ -43,17 +43,19 @@ class PengunjungController extends Controller
                 'NIP_NIK' => $request->NIK,
                 'NAMA' => $request->NAMA,
                 'EMAIL' => $request->EMAIL,
-                'INSTANSI_UNIT' => $request->INSTANSI_UNIT
+                'INSTANSI_UNIT' => $request->INSTANSI_UNIT,
+                'ID_KANTOR' => $request->ID_KANTOR
             ]);
         }
 
         // Generate new antrian number
         $today = now()->toDateString();
         $lastAntrian = LayananModel::whereDate('DIBUAT_TANGGAL', $today)
-            ->orderBy('ID_LAYANAN', 'desc')
-            ->first();
+    ->where('ID_KANTOR', $request->ID_KANTOR)
+    ->orderBy('ID_LAYANAN', 'desc')
+    ->first();
 
-        $newAntrianNumber = $lastAntrian ? $lastAntrian->NO_ANTRIAN + 1 : 1;
+$newAntrianNumber = $lastAntrian ? $lastAntrian->NO_ANTRIAN + 1 : 1;
 
         // Create Layanan
         $layanan = LayananModel::create([
@@ -76,7 +78,9 @@ class PengunjungController extends Controller
             'NOTE' => null,
             'STATUS' => null,
             'DIBUAT_OLEH' => null,
-            'DIBUAT_TANGGAL' => now()
+            'DIBUAT_TANGGAL' => now(),
+            'ID_KANTOR' => $request->ID_KANTOR,
+            'TRANSKRIP' => null
         ]);
  
         // return response()->json(['success' => 'Data Berhasil Disimpan!', 'no_antrian' => $layanan->NO_ANTRIAN]);

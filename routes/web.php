@@ -27,6 +27,7 @@ Route::get('/search', [PengunjungController::class, 'search'])->name('search');
 
 Route::get('/kategorilayanan', [DetailPenggunaController::class, 'getCustomFields'])->name('kategorilayanan');
 Route::get('/get-jenis-layanan/{departemen_id}', [DetailPenggunaController::class, 'getJenisLayanan']);
+Route::post('/layanan/tambah', [DetailPenggunaController::class, 'tambah'])->name('layanan.tambah');
 Route::post('/layanan/update', [DetailPenggunaController::class, 'update'])->name('layanan.update');
 // Route::get('/get-token', [DetailPenggunaController::class, 'getToken'])->name('get-token');
 // Route::get('/ticket-custom-fields', [DetailPenggunaController::class, 'getTicketCustomFields'])->name('ticket-custom-fields');

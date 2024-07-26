@@ -21,6 +21,7 @@ class PengunjungModel extends Model
         'NIP_NIK',
         'NAMA',
         'EMAIL',
-        'INSTANSI_UNIT'
+        'INSTANSI_UNIT',
+        'ID_KANTOR'
     ];
 }

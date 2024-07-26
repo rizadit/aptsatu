@@ -42,7 +42,9 @@ class LayananModel extends Model
         'NOTE',
         'STATUS',
         'DIBUAT_OLEH',
-        'DIBUAT_TANGGAL'
+        'DIBUAT_TANGGAL',
+        'ID_KANTOR',
+        'TRANSKRIP'
     ];
 
     // Tentukan kolom yang tidak ingin dimasukkan secara otomatis oleh Eloquent
