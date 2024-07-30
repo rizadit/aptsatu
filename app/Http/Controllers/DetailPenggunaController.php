@@ -21,11 +21,10 @@ class DetailPenggunaController extends Controller
     //
     public function index()
     {
-        // $layanans = LayananModel::all(); // Mengambil semua data dari tabel T_LAYANAN
-        // $layanans = LayananModel::join('R_PENGUNJUNG', 'T_LAYANAN.ID_PENGUNJUNG', '=', 'R_PENGUNJUNG.ID_PENGUNJUNG')
-        //     ->select('T_LAYANAN.*', 'R_PENGUNJUNG.NAMA as NAMA_PENGUNJUNG')
-        //     ->get();
+        $idKantor = session('user')->ID_KANTOR;
         $layanans = DB::table('T_LAYANAN')
+
+
             ->leftJoin('R_PENGUNJUNG', 'T_LAYANAN.ID_PENGUNJUNG', '=', 'R_PENGUNJUNG.ID_PENGUNJUNG')
             ->leftJoin('r_departemen', 'T_LAYANAN.ID_JENISDEPARTEMEN', '=', 'r_departemen.ID_DEPARTEMEN')
             ->leftJoin('R_JENISLAYANAN', 'T_LAYANAN.ID_JENISLAYANAN', '=', 'R_JENISLAYANAN.ID_JENISLAYANAN')
@@ -34,6 +33,7 @@ class DetailPenggunaController extends Controller
             ->leftJoin('R_JENISTIKET', 'T_LAYANAN.ID_JENISTIKET', '=', 'R_JENISTIKET.ID_JENISTIKET')
             ->leftJoin('R_JENISPENGGUNA', 'T_LAYANAN.ID_JENISPENGGUNA', '=', 'R_JENISPENGGUNA.ID_JENISPENGGUNA')
             ->leftJoin('R_JENISKELAMIN', 'T_LAYANAN.ID_JENISKELAMIN', '=', 'R_JENISKELAMIN.ID_JENISKELAMIN')
+            ->where('T_LAYANAN.ID_KANTOR', $idKantor)
             ->select(
                 'T_LAYANAN.*',
                 'R_PENGUNJUNG.*',
@@ -73,6 +73,7 @@ class DetailPenggunaController extends Controller
             ->leftJoin('R_JENISTIKET', 'T_LAYANAN.ID_JENISTIKET', '=', 'R_JENISTIKET.ID_JENISTIKET')
             ->leftJoin('R_JENISPENGGUNA', 'T_LAYANAN.ID_JENISPENGGUNA', '=', 'R_JENISPENGGUNA.ID_JENISPENGGUNA')
             ->leftJoin('R_JENISKELAMIN', 'T_LAYANAN.ID_JENISKELAMIN', '=', 'R_JENISKELAMIN.ID_JENISKELAMIN')
+            ->leftJoin('R_KANTOR', 'T_LAYANAN.ID_KANTOR', '=', 'R_KANTOR.ID_KANTOR')
             ->select(
                 'T_LAYANAN.*',
                 'R_PENGUNJUNG.*',
@@ -82,7 +83,8 @@ class DetailPenggunaController extends Controller
                 'R_JENISPRIORITAS.*',
                 'R_JENISTIKET.*',
                 'R_JENISPENGGUNA.*',
-                'R_JENISKELAMIN.*'
+                'R_JENISKELAMIN.*',
+                'R_KANTOR.*'
             )
             ->where('T_LAYANAN.ID_LAYANAN', $ID_LAYANAN)
             ->first();
@@ -123,8 +125,10 @@ class DetailPenggunaController extends Controller
         ]);
         $today = now()->toDateString();
         $lastAntrian = LayananModel::whereDate('DIBUAT_TANGGAL', $today)
+            ->where('ID_KANTOR', $request->ID_KANTOR)
             ->orderBy('ID_LAYANAN', 'desc')
             ->first();
+
         $newAntrianNumber = $lastAntrian ? $lastAntrian->NO_ANTRIAN + 1 : 1;
 
         $pengunjung = PengunjungModel::create([
@@ -155,7 +159,7 @@ class DetailPenggunaController extends Controller
         $layanan->PERTANYAAN = $request->PERTANYAAN;
         $layanan->JAWABAN = $request->JAWABAN;
         $layanan->NOTE = $request->NOTE;
-        $layanan->STATUS = null;
+        $layanan->STATUS = 0;
         $layanan->DIBUAT_OLEH = null;
         $layanan->DIBUAT_TANGGAL = now();
         $layanan->ID_KANTOR = $request->ID_KANTOR;
@@ -197,7 +201,32 @@ class DetailPenggunaController extends Controller
 
         $layanan = LayananModel::find($request->ID_LAYANAN);
         if ($layanan) {
-            $layanan->update($request->all());
+            $layanan->SUBJEK = $request->SUBJEK;
+            $layanan->ID_JENISDEPARTEMEN = $request->ID_JENISDEPARTEMEN;
+            $layanan->ID_JENISLAYANAN = $request->ID_JENISLAYANAN;
+            $layanan->ID_JENISKANAL = $request->ID_JENISKANAL;
+            $layanan->ID_JENISPRIORITAS = $request->ID_JENISPRIORITAS;
+            $layanan->ID_JENISTIKET = $request->ID_JENISTIKET;
+            $layanan->ID_JENISPENGGUNA = $request->ID_JENISPENGGUNA;
+            $layanan->ID_JENISKELAMIN = $request->ID_JENISKELAMIN;
+            $layanan->DETAIL_UNITKERJA = $request->DETAIL_UNITKERJA;
+            $layanan->INITIAL_AGENT = $request->INITIAL_AGENT;
+            $layanan->WAKTU_LAYANAN_MULAI = $request->WAKTU_LAYANAN_MULAI;
+            $layanan->WAKTU_LAYANAN_SELESAI = $request->WAKTU_LAYANAN_SELESAI;
+            $layanan->PERTANYAAN = $request->PERTANYAAN;
+            $layanan->JAWABAN = $request->JAWABAN;
+            $layanan->NOTE = $request->NOTE;
+            if ($request->WAKTU_LAYANAN_SELESAI == null) {
+                $layanan->STATUS = 0;
+            } else {
+                $layanan->STATUS = 1;
+            }
+            $layanan->DIBUAT_OLEH = null;
+            $layanan->DIBUAT_TANGGAL = now();
+            $layanan->ID_KANTOR = $request->ID_KANTOR;
+            $layanan->TRANSKRIP = $request->TRANSKRIP;
+
+            $layanan->update();
             return response()->json(['success' => 'Data layanan berhasil diperbarui.']);
         }
 

@@ -94,7 +94,7 @@
                                     <label for="TELEPON">No Telepon</label>
                                     <div class="input-group">
                                         <input type="hidden" class="form-control form-control-lg border-left-0"
-                                            id="ID_KANTOR" name="ID_KANTOR" value="{{ session('user')->ID_USER }}">
+                                            id="ID_KANTOR" name="ID_KANTOR" value="{{ session('kantor')->ID_KANTOR }}">
                                         <input type="text" class="form-control form-control-lg border-left-0"
                                             id="TELEPON" name="TELEPON" placeholder="TELEPON">
                                         <div class="input-group-append">

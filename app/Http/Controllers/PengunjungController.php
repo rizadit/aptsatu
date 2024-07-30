@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -14,7 +14,7 @@ class PengunjungController extends Controller
     //
     public function index()
     {
-        $jenisPengguna = DB::table('R_JENISPENGGUNA')->get();    
+        $jenisPengguna = DB::table('R_JENISPENGGUNA')->get();
         return view('pengunjung', compact('jenisPengguna'));
     }
 
@@ -51,11 +51,11 @@ class PengunjungController extends Controller
         // Generate new antrian number
         $today = now()->toDateString();
         $lastAntrian = LayananModel::whereDate('DIBUAT_TANGGAL', $today)
-    ->where('ID_KANTOR', $request->ID_KANTOR)
-    ->orderBy('ID_LAYANAN', 'desc')
-    ->first();
+            ->where('ID_KANTOR', $request->ID_KANTOR)
+            ->orderBy('ID_LAYANAN', 'desc')
+            ->first();
 
-$newAntrianNumber = $lastAntrian ? $lastAntrian->NO_ANTRIAN + 1 : 1;
+        $newAntrianNumber = $lastAntrian ? $lastAntrian->NO_ANTRIAN + 1 : 1;
 
         // Create Layanan
         $layanan = LayananModel::create([
@@ -82,7 +82,7 @@ $newAntrianNumber = $lastAntrian ? $lastAntrian->NO_ANTRIAN + 1 : 1;
             'ID_KANTOR' => $request->ID_KANTOR,
             'TRANSKRIP' => null
         ]);
- 
+
         // return response()->json(['success' => 'Data Berhasil Disimpan!', 'no_antrian' => $layanan->NO_ANTRIAN]);
         return redirect()->route('pengunjung.index')->with(['success' => 'Data Berhasil Disimpan!', 'no_antrian' => $layanan->NO_ANTRIAN]);
     }

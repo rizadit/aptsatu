@@ -16,4 +16,4 @@ class RDepartemen extends Model
     {
         return $this->hasMany(RJenisLayanan::class, 'ID_DEPARTEMEN', 'ID_DEPARTEMEN');
     }
-}
+} 
