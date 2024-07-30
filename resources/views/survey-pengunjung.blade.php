@@ -81,71 +81,41 @@
                             <a  href="{{ route('survey-pengunjung') }}" class="btn bg-white text-dark font-12">Survey</a>
                         </div>
                     </div>
-                    <div class="col-lg-6  d-flex flex-row align-items-center">
-                        <div class="auth-form-transparent text-left p-3">
-                            <div class="brand-logo">
+                    <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                        {{-- <div class=" "> --}}
+                            {{-- <div class="brand-logo">
                                 <img src="{{ asset('assets_pluginAdmin/images/logodjkn.png') }}" alt="logo">
+                            </div> --}}
+                            {{-- <h4>Selamat Datang!</h4>
+                            <h6 class="fw-light">Silahkan login!</h6> --}}
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Nomor Antrian</th>
+                                            <th>Nama</th>
+                                            <th>No Telepon</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($layanans as $layanan)
+                                            <tr>
+                                                <td>{{ $layanan->DIBUAT_TANGGAL }}</td>
+                                                <td>{{ $layanan->NO_ANTRIAN }}</td>
+                                                <td>{{ $layanan->NAMA }}</td>
+                                                <td>{{ $layanan->TELEPON }}</td>
+                                                <td>
+                                                    <a href="{{ route('survey.create', ['id' => $layanan->ID_LAYANAN]) }}" class="btn btn-outline-success "
+                                                        data-id="{{ $layanan->ID_LAYANAN }}">Pilih</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
-                            <h4>Selamat Datang!</h4>
-                            <h6 class="fw-light">Silahkan login!</h6>
-                            <form class="pt-3" action="{{ route('pengunjung.store') }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="TELEPON">No Telepon</label>
-                                    <div class="input-group">
-                                        <input type="hidden" class="form-control form-control-lg border-left-0"
-                                            id="ID_KANTOR" name="ID_KANTOR" value="{{ session('kantor')->ID_KANTOR }}">
-                                        <input type="text" class="form-control form-control-lg border-left-0"
-                                            id="TELEPON" name="TELEPON" placeholder="TELEPON">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sm btn-success" type="button" id="search-btn"> cari
-                                            </button>
-                                        </div>
-                                        {{-- <input type="text" class="form-control form-control-lg border-left-0"
-                                            id="TELEPON" name="TELEPON" placeholder="TELEPON"> --}}
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="NIK">NIK</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control form-control-lg border-left-0"
-                                            id="NIK" name="NIK" placeholder="NIK">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="NAMA LENGKAP">Nama Lengkap</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control form-control-lg border-left-0"
-                                            id="NAMA" name="NAMA" placeholder="NAMA LENGKAP">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="E-MAIL">E-Mail</label>
-                                    <div class="input-group">
-                                        <input type="email" class="form-control form-control-lg border-left-0"
-                                            id="EMAIL" name="EMAIL" placeholder="EMAIL">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="INSTANSI?UNIT">Instansi / Unit</label>
-                                    <div class="input-group">
-                                        <select class="js-example-basic-single" id="INSTANSI_UNIT" name="INSTANSI_UNIT"
-                                            style="width: 100%;">
-                                            @foreach ($jenisPengguna as $jenis)
-                                                <option value="{{ $jenis->ID_JENISPENGGUNA }}">
-                                                    {{ $jenis->URAIAN_JENISPENGGUNA }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="my-3 d-grid gap-2 ">
-                                    <button type="submit"
-                                        class="btn btn-block btn-success btn-lg fw-semibold auth-form-btn">Submit
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                        {{-- </div> --}}
 
                     </div>
 

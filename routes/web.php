@@ -23,6 +23,9 @@ Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
 
 Route::resource('/pengunjung', \App\Http\Controllers\PengunjungController::class);
+Route::get('/survey-pengunjung', [SurveyController::class, 'surveyPengunjung'])->name('survey-pengunjung');
+Route::get('/survey/create/{id}', [SurveyController::class, 'create'])->name('survey.create');
+Route::post('/survey/store', [SurveyController::class, 'store'])->name('survey.store');
 Route::get('/search', [PengunjungController::class, 'search'])->name('search');
 
 Route::get('/kategorilayanan', [DetailPenggunaController::class, 'getCustomFields'])->name('kategorilayanan');
