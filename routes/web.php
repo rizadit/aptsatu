@@ -40,6 +40,8 @@ Route::post('/layanan/update', [DetailPenggunaController::class, 'update'])->nam
 // });
 
 Route::get('/input', [InputDataLayananController::class, 'index'])->name('input');
+Route::get('/whatsapp/{ID_KANAL}', [InputDataLayananController::class, 'whatsapp'])->name('whatsapp');
+Route::get('/telepon/{ID_KANAL}', [InputDataLayananController::class, 'telepon'])->name('telepon');
 Route::get('/detail-pengguna', [DetailPenggunaController::class, 'index'])->name('detail-pengguna');
 // Route::get('/detail/{id}', [DetailPenggunaController::class, 'getLayananDetail'])->name('detail');
 Route::get('/detail', [DetailPenggunaController::class, 'getLayananDetail'])->name('detail');
