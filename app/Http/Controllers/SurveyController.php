@@ -65,7 +65,7 @@ class SurveyController extends Controller
             ->leftJoin('R_PENGUNJUNG', 'T_LAYANAN.ID_PENGUNJUNG', '=', 'R_PENGUNJUNG.ID_PENGUNJUNG')
             ->leftJoin('surveys', 'T_LAYANAN.ID_LAYANAN', '=', 'surveys.ID_LAYANAN')
             ->where('T_LAYANAN.ID_KANTOR', $idKantor)
-            ->where('T_LAYANAN.STATUS', 2)
+            // ->where('T_LAYANAN.STATUS', 1)
             ->where(function ($query) {
                 $query->where('surveys.STATUS', '!=', 1)
                     ->orWhereNull('surveys.STATUS');
