@@ -3,15 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    
+
     {{-- <link rel="stylesheet" href="{{ asset('assets_pluginLanding/style.css') }}" /> --}}
     {{-- <link rel="stylesheet" href="style.css"> --}}
     <!-- Boxiocns CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
-    
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('assets_pluginAdmin/vendors/select2/select2.min.css') }}" />
     <link rel="stylesheet"
@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="{{ asset('assets_pluginLanding/style2.css') }}" />
     <link rel="shortcut icon" href="{{ asset('assets_pluginAdmin/images/logodjkn.png') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>        
-        
+    <style>
+
     </style>
 </head>
 
@@ -81,200 +81,125 @@
                         <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
                             <h1 style="color: white;">SURVEI<br> KEPUASAN <br> MASYARAKAT</h1>
                             <p style="color: white;">Area Layanan Terpadu</p>
-                            <button class="btn bg-white text-dark font-12">{{ session('kantor')->URAIAN_KANTOR }}</button>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <button
+                                class="btn bg-white text-dark font-12">{{ session('kantor')->URAIAN_KANTOR }}</button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
                                 @csrf
-                            </form>                           
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-8 d-flex align-items-center justify-content-center">
                         <form action="{{ route('survey.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="ID_LAYANAN" value="{{ $id }}">
+                            <table>
+                                @foreach ($layanans as $layanan)
+                            <tr>
+                                <td>Nama Pengunjung</td>
+                                <td>:</td>
+                                <td>{{ $layanan->NAMA }}</td>
+                            </tr>
+                            <tr>
+                                <td>Nomor Telepon</td>
+                                <td>:</td>
+                                <td>{{ $layanan->TELEPON }}</td>
+                            </tr>
+                            @endforeach
+                            </table>
                             <table class="survey-table">
-                                <tr>
-                                    <th>1. Persyaratan Administrasi Layanan</th>
-                                    <td>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="administrasi_layanan" value="1">
-                                                Tidak Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="administrasi_layanan" value="2">
-                                                Kurang Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="administrasi_layanan" value="3">
-                                                Cukup Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="administrasi_layanan" value="4">
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="administrasi_layanan" value="5">
-                                                Sangat Puas</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>2. Prosedur Layanan</th>
-                                    <td>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="prosedur_layanan" value="1"> Tidak
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="prosedur_layanan" value="2"> Kurang
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="prosedur_layanan" value="3"> Cukup
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="prosedur_layanan" value="4">
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="prosedur_layanan" value="5"> Sangat
-                                                Puas</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>3. Waktu Layanan</th>
-                                    <td>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="waktu_layanan" value="1"> Tidak
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="waktu_layanan" value="2"> Kurang
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="waktu_layanan" value="3"> Cukup
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="waktu_layanan" value="4">
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="waktu_layanan" value="5"> Sangat
-                                                Puas</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>4. Biaya Layanan</th>
-                                    <td>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="biaya_layanan" value="1"> Tidak
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="biaya_layanan" value="2"> Kurang
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="biaya_layanan" value="3"> Cukup
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="biaya_layanan" value="4">
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="biaya_layanan" value="5"> Sangat
-                                                Puas</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>5. Kompetensi Petugas Layanan</th>
-                                    <td>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="kompetensi_petugas" value="1">
-                                                Tidak Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kompetensi_petugas" value="2">
-                                                Kurang Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kompetensi_petugas" value="3">
-                                                Cukup Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kompetensi_petugas" value="4">
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kompetensi_petugas" value="5">
-                                                Sangat Puas</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>6. Kesopanan Petugas Layanan</th>
-                                    <td>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="kesopanan_petugas" value="1">
-                                                Tidak Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kesopanan_petugas" value="2">
-                                                Kurang Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kesopanan_petugas" value="3">
-                                                Cukup Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kesopanan_petugas" value="4">
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kesopanan_petugas" value="5">
-                                                Sangat Puas</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>7. Kualitas Sarana dan Prasarana</th>
-                                    <td>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="kualitas_sarana" value="1"> Tidak
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kualitas_sarana" value="2">
-                                                Kurang Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kualitas_sarana" value="3"> Cukup
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kualitas_sarana" value="4">
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="kualitas_sarana" value="5">
-                                                Sangat Puas</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>8. Ketersediaan Kanal Layanan Pengaduan</th>
-                                    <td>
-                                        <div class="radio-group">
-                                            <label><input type="radio" name="ketersediaan_kanal" value="1">
-                                                Tidak Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="ketersediaan_kanal" value="2">
-                                                Kurang Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="ketersediaan_kanal" value="3">
-                                                Cukup Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="ketersediaan_kanal" value="4">
-                                                Puas</label>
-                                            <div class="separator"></div>
-                                            <label><input type="radio" name="ketersediaan_kanal" value="5">
-                                                Sangat Puas</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>9. Saran dan Kritik</th>
-                                    <td>
-                                        <textarea name="saran_kritik" class="form-control"></textarea>
-                                    </td>
-                                </tr>
+                                <thead>
+                                    
+                                    <tr>
+                                        <th>Pertanyaan</th>
+                                        <th>Tidak Puas</th>
+                                        <th>Kurang Puas</th>
+                                        <th>Cukup Puas</th>
+                                        <th>Puas</th>
+                                        <th>Sangat Puas</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>1. Persyaratan Administrasi Layanan</th>
+                                        <td><input type="radio" name="administrasi_layanan" value="1"></td>
+                                        <td><input type="radio" name="administrasi_layanan" value="2"></td>
+                                        <td><input type="radio" name="administrasi_layanan" value="3"></td>
+                                        <td><input type="radio" name="administrasi_layanan" value="4"></td>
+                                        <td><input type="radio" name="administrasi_layanan" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>2. Prosedur Layanan</th>
+                                        <td><input type="radio" name="prosedur_layanan" value="1"></td>
+                                        <td><input type="radio" name="prosedur_layanan" value="2"></td>
+                                        <td><input type="radio" name="prosedur_layanan" value="3"></td>
+                                        <td><input type="radio" name="prosedur_layanan" value="4"></td>
+                                        <td><input type="radio" name="prosedur_layanan" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>3. Waktu Layanan</th>
+                                        <td><input type="radio" name="waktu_layanan" value="1"></td>
+                                        <td><input type="radio" name="waktu_layanan" value="2"></td>
+                                        <td><input type="radio" name="waktu_layanan" value="3"></td>
+                                        <td><input type="radio" name="waktu_layanan" value="4"></td>
+                                        <td><input type="radio" name="waktu_layanan" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>4. Biaya Layanan</th>
+                                        <td><input type="radio" name="biaya_layanan" value="1"></td>
+                                        <td><input type="radio" name="biaya_layanan" value="2"></td>
+                                        <td><input type="radio" name="biaya_layanan" value="3"></td>
+                                        <td><input type="radio" name="biaya_layanan" value="4"></td>
+                                        <td><input type="radio" name="biaya_layanan" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>5. Kompetensi Petugas Layanan</th>
+                                        <td><input type="radio" name="kompetensi_petugas" value="1"></td>
+                                        <td><input type="radio" name="kompetensi_petugas" value="2"></td>
+                                        <td><input type="radio" name="kompetensi_petugas" value="3"></td>
+                                        <td><input type="radio" name="kompetensi_petugas" value="4"></td>
+                                        <td><input type="radio" name="kompetensi_petugas" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>6. Kesopanan Petugas Layanan</th>
+                                        <td><input type="radio" name="kesopanan_petugas" value="1"></td>
+                                        <td><input type="radio" name="kesopanan_petugas" value="2"></td>
+                                        <td><input type="radio" name="kesopanan_petugas" value="3"></td>
+                                        <td><input type="radio" name="kesopanan_petugas" value="4"></td>
+                                        <td><input type="radio" name="kesopanan_petugas" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>7. Kualitas Sarana dan Prasarana</th>
+                                        <td><input type="radio" name="kualitas_sarana" value="1"></td>
+                                        <td><input type="radio" name="kualitas_sarana" value="2"></td>
+                                        <td><input type="radio" name="kualitas_sarana" value="3"></td>
+                                        <td><input type="radio" name="kualitas_sarana" value="4"></td>
+                                        <td><input type="radio" name="kualitas_sarana" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>8. Ketersediaan Kanal Layanan Pengaduan</th>
+                                        <td><input type="radio" name="ketersediaan_kanal" value="1"></td>
+                                        <td><input type="radio" name="ketersediaan_kanal" value="2"></td>
+                                        <td><input type="radio" name="ketersediaan_kanal" value="3"></td>
+                                        <td><input type="radio" name="ketersediaan_kanal" value="4"></td>
+                                        <td><input type="radio" name="ketersediaan_kanal" value="5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>9. Saran dan Kritik</th>
+                                        <td colspan="5">
+                                            <textarea name="saran_kritik" class="form-control"></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                             <div class="submit-container">
                                 <button type="submit" class="btn btn-primary submit-button">Submit</button>
                             </div>
-                        </form>                        
+                        </form>
                     </div>
                 </div>
-            </div>            
-        </div>        
+            </div>
+        </div>
     </section>
     <script>
         let arrow = document.querySelectorAll(".arrow");
@@ -334,14 +259,14 @@
             });
         });
     </script>
-     <script src="{{ asset('assets_pluginAdmin/vendors/js/vendor.bundle.base.js') }}"></script>
-     <script src="{{ asset('assets_pluginAdmin/vendors/select2/select2.min.js') }}"></script>
-     <script src="{{ asset('assets_pluginAdmin/js/off-canvas.js') }}"></script>
-     <script src="{{ asset('assets_pluginAdmin/js/hoverable-collapse.js') }}"></script>
-     <script src="{{ asset('assets_pluginAdmin/js/misc.js') }}"></script>
-     <script src="{{ asset('assets_pluginAdmin/js/settings.js') }}"></script>
-     <script src="{{ asset('assets_pluginAdmin/js/todolist.js') }}"></script>
-    <script src="{{ asset('assets_pluginAdmin/js/select2.js') }}"></script>   
+    <script src="{{ asset('assets_pluginAdmin/vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ asset('assets_pluginAdmin/vendors/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('assets_pluginAdmin/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('assets_pluginAdmin/js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('assets_pluginAdmin/js/misc.js') }}"></script>
+    <script src="{{ asset('assets_pluginAdmin/js/settings.js') }}"></script>
+    <script src="{{ asset('assets_pluginAdmin/js/todolist.js') }}"></script>
+    <script src="{{ asset('assets_pluginAdmin/js/select2.js') }}"></script>
 </body>
 
 </html>

@@ -43,7 +43,7 @@
       </li>
       {{-- @if (session('user')->ROLE != 'petugas' || session('user')->ROLE != 'kantor') --}}
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('dashboard.admin') }}">
           <i class="mdi mdi-file-chart menu-icon"></i>
           <span class="menu-title">Dashboad & Laporan</span>
         </a>

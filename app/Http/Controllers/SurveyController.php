@@ -86,7 +86,17 @@ class SurveyController extends Controller
 
     public function create($id)
     {
-        return view('list-survey', compact('id'));
+        $idKantor = session('user')->ID_KANTOR;
+        $layanans = DB::table('T_LAYANAN')
+            ->leftJoin('R_PENGUNJUNG', 'T_LAYANAN.ID_PENGUNJUNG', '=', 'R_PENGUNJUNG.ID_PENGUNJUNG')
+            ->where('T_LAYANAN.ID_KANTOR', $idKantor)
+            ->where('T_LAYANAN.ID_LAYANAN', $id)
+            ->select(
+                'T_LAYANAN.*',
+                'R_PENGUNJUNG.*'
+            )
+            ->get();
+        return view('list-survey', compact(['id','layanans']));
     }
 
     public function store(Request $request)

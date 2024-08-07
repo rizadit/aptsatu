@@ -23,8 +23,6 @@ class DetailPenggunaController extends Controller
     {
         $idKantor = session('user')->ID_KANTOR;
         $layanans = DB::table('T_LAYANAN')
-
-
             ->leftJoin('R_PENGUNJUNG', 'T_LAYANAN.ID_PENGUNJUNG', '=', 'R_PENGUNJUNG.ID_PENGUNJUNG')
             ->leftJoin('r_departemen', 'T_LAYANAN.ID_JENISDEPARTEMEN', '=', 'r_departemen.ID_DEPARTEMEN')
             ->leftJoin('R_JENISLAYANAN', 'T_LAYANAN.ID_JENISLAYANAN', '=', 'R_JENISLAYANAN.ID_JENISLAYANAN')
@@ -159,7 +157,11 @@ class DetailPenggunaController extends Controller
         $layanan->PERTANYAAN = $request->PERTANYAAN;
         $layanan->JAWABAN = $request->JAWABAN;
         $layanan->NOTE = $request->NOTE;
-        $layanan->STATUS = 0;
+        if ($request->WAKTU_LAYANAN_SELESAI == null) {
+            $layanan->STATUS = 0;
+        } else {
+            $layanan->STATUS = 1;
+        }
         $layanan->DIBUAT_OLEH = null;
         $layanan->DIBUAT_TANGGAL = now();
         $layanan->ID_KANTOR = $request->ID_KANTOR;

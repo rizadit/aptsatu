@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AntrianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -13,11 +14,15 @@ use App\Http\Controllers\SurveyController;
 Route::get('/', function () {
     return view('home2');
 });
+Route::get('/antrian', [AntrianController::class, 'index'])->name('antrian');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard-admin', [DashboardController::class, 'dashboardAdmin'])->name('dashboard.admin');
+Route::get('/gender-data', [DashboardController::class, 'getGenderData'])->name('gender-data');
+Route::get('/detailunitkerja-data', [DashboardController::class, 'getUnitKerjaData'])->name('detailunitkerja-data');
 // Route::get('/pengunjung', [PengunjungController::class, 'index'])->name('pengunjung');
 Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('auth');
