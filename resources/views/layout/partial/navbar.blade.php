@@ -112,8 +112,17 @@
             <a class="dropdown-item" href="#">
                Ubah Password </a>
             <div class="dropdown-divider"></div>
+            @php
+    $userData = session()->get('user-data');
+@endphp
+
+@if ($userData && array_key_exists('nama', $userData) && $userData['nama'] !== null)
+            <a class="dropdown-item" href="{{ route('kemenkeu-id.logout') }}">Logout</a>  
+            @else
             <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-               Logout </a> 
+              Logout </a>   
+            @endif
+            
                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>           

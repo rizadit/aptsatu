@@ -21,7 +21,7 @@ class DetailPenggunaController extends Controller
     //
     public function index()
     {
-        $idKantor = session('user')->ID_KANTOR;
+        $idKantor = session('user')->ID_KANTOR ?? session()->get('user-data')['idKantor'];
         $layanans = DB::table('T_LAYANAN')
             ->leftJoin('R_PENGUNJUNG', 'T_LAYANAN.ID_PENGUNJUNG', '=', 'R_PENGUNJUNG.ID_PENGUNJUNG')
             ->leftJoin('r_departemen', 'T_LAYANAN.ID_JENISDEPARTEMEN', '=', 'r_departemen.ID_DEPARTEMEN')

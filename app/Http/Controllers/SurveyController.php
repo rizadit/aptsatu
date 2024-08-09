@@ -21,7 +21,7 @@ class SurveyController extends Controller
     //
     public function index()
     {
-        $idKantor = session('user')->ID_KANTOR;
+        $idKantor = session('user')->ID_KANTOR ?? session()->get('user-data')['idKantor'];
         $layanans = DB::table('T_LAYANAN')
 
 
@@ -58,7 +58,7 @@ class SurveyController extends Controller
 
     public function surveyPengunjung()
     {
-        $idKantor = session('user')->ID_KANTOR;
+        $idKantor = session('user')->ID_KANTOR ?? session()->get('user-data')['idKantor'];
         $layanans = DB::table('T_LAYANAN')
 
 
@@ -86,7 +86,7 @@ class SurveyController extends Controller
 
     public function create($id)
     {
-        $idKantor = session('user')->ID_KANTOR;
+        $idKantor = session('user')->ID_KANTOR ?? session()->get('user-data')['idKantor'];
         $layanans = DB::table('T_LAYANAN')
             ->leftJoin('R_PENGUNJUNG', 'T_LAYANAN.ID_PENGUNJUNG', '=', 'R_PENGUNJUNG.ID_PENGUNJUNG')
             ->where('T_LAYANAN.ID_KANTOR', $idKantor)

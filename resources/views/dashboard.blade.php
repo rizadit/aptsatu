@@ -76,38 +76,43 @@
         </div>
         <div class="col-xl-6 stretch-card grid-margin">
             <div class="card">
-                <div class="card-body pb-0">
+                <div class="card-body">
                     <h4 class="card-title mb-0">Jumlah dan Waktu Layanan</h4>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card border-0">
-                            <div class="card-body">
-                                <div class="card-title">Total Layanan</div>
-                                <div class="d-flex flex-wrap">
-                                    <div class="doughnut-wrapper w-50">
-                                        <canvas id="jeniskanal" width="100" height="100"></canvas>
-                                    </div>
-                                    <div id="doughnut-chart-legend5"
-                                        class="pl-lg-3 rounded-legend align-self-center flex-grow legend-vertical legend-bottom-left">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card border-0">
+                                <div class="card-body">
+                                    <div class="card-title">Total Layanan</div>
+                                    <div class="d-flex flex-wrap">
+                                        <div class="doughnut-wrapper w-50">
+                                            <canvas id="jeniskanal" width="100" height="100"></canvas>
+                                        </div>
+                                        <div id="doughnut-chart-legend5"
+                                            class="pl-lg-3 rounded-legend align-self-center flex-grow legend-vertical legend-bottom-left">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card border-0">
-                            <div class="card-body">
-                                @foreach ($jenisKanalCounts as $kanal)
-                                <div class="card-title">{{ $kanal->URAIAN_JENISKANAL }}</div>
-                                <div class="">
-                                    <p>Jumlah Layanan: {{ $kanal->count }} ({{ round(($kanal->count / $jenisKanalCounts->sum('count')) * 100, 2) }}%)<br>Rata-rata waktu layanan: 3 menit 1 detik</p>
+                        <div class="col-md-8">
+                            <div class="card border-0">
+                                <div class="card-body">
+                                    @foreach ($jenisKanalCounts as $kanal)
+                                        <div class="card-title">{{ $kanal->URAIAN_JENISKANAL }}</div>
+                                        <div class="">
+                                            <p>Jumlah Layanan: {{ $kanal->count }}
+                                                ({{ round(($kanal->count / $jenisKanalCounts->sum('count')) * 100, 2) }}%)
+                                                <br>Rata-rata
+                                                waktu layanan: 3 menit 1 detik
+                                            </p>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                @endforeach                                
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -115,32 +120,30 @@
     <div class="row">
         <div class="col-sm-6 stretch-card grid-margin">
             <div class="card">
-                <div class="card-body pb-0">
-                    <h4 class="card-title mb-0">Jenis Kategori Layanan</h4>
-                </div>
-                <div class="card-body p-0">
+                <div class="card-body">
+                    <h4 class="mb-3">Jenis Kategori Layanan</h4>
                     <div class="table-responsive">
-                        <table class="table custom-table text-dark">
+                        <table id="layananTable" class="table custom-table text-dark">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Kategori Layanan</th>
-                                    <th>Jumlah</th>                                    
+                                    <th>Jumlah</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($jenisLayananCounts as $index => $layanan)
-                                <tr>                                    
-                                    <td>{{ $loop->iteration }}</td>                                    
-                                    <td>{{ $layanan->URAIAN_JENISLAYANAN }}</td>
-                                    <td>{{ $layanan->count }} ({{ round(($layanan->count / $jenisLayananCounts->sum('count')) * 100, 2) }}%)</td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $layanan->URAIAN_JENISLAYANAN }}</td>
+                                        <td>{{ $layanan->count }}
+                                            ({{ round(($layanan->count / $jenisLayananCounts->sum('count')) * 100, 2) }}%)
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <a class="text-black font-13 d-block pt-2 pb-2 pb-lg-0 font-weight-bold pl-4" href="#">Show
-                        more</a>
                 </div>
             </div>
         </div>
@@ -150,124 +153,56 @@
                     <h4 class="card-title mb-0">Survei Kepuasan Masyarakat</h4>
                 </div>
                 <div class="card-body p-0">
-                    {{-- <div class="table-responsive">
+                    <div class="table-responsive">
                         <table class="table custom-table text-dark">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Sale Rate</th>
-                                    <th>Actual</th>
-                                    <th>Variance</th>
+                                    <th>Indikator Penilaian</th>
+                                    <th>Nilai Rata-rata</th>
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <tr>
-                                    <td>
-                                        <img src="../assets/images/faces/face2.jpg" class="mr-2" alt="image" />
-                                        Jacob
-                                        Jensen
-                                    </td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <span class="pr-2 d-flex align-items-center">85%</span>
-                                            <select id="star-1" name="rating" autocomplete="off">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>32,435</td>
-                                    <td>40,234</td>
+                                    <td>Kejelasan Persyaratan Administrasi Layanan</td>
+                                    <td>{{ number_format($results->avg('avg_administrasi_layanan'), 1) }}</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <img src="../assets/images/faces/face3.jpg" class="mr-2" alt="image" />
-                                        Cecelia
-                                        Bradley
-                                    </td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <span class="pr-2 d-flex align-items-center">55%</span>
-                                            <select id="star-2" name="rating" autocomplete="off">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>4,36780</td>
-                                    <td>765728</td>
+                                    <td>Kejelasan Prosedur Layanan</td>
+                                    <td>{{ number_format($results->avg('avg_prosedur_layanan'), 1) }}</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <img src="../assets/images/faces/face4.jpg" class="mr-2" alt="image" /> Leah
-                                        Sherman
-                                    </td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <span class="pr-2 d-flex align-items-center">23%</span>
-                                            <select id="star-3" name="rating" autocomplete="off">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>2300</td>
-                                    <td>22437</td>
+                                    <td>Kejelasan Biaya Pelayanan</td>
+                                    <td>{{ number_format($results->avg('avg_biaya_layanan'), 1) }}</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <img src="../assets/images/faces/face5.jpg" class="mr-2" alt="image" /> Ina
-                                        Curry
-                                    </td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <span class="pr-2 d-flex align-items-center">44%</span>
-                                            <select id="star-4" name="rating" autocomplete="off">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>53462</td>
-                                    <td>1,75938</td>
+                                    <td>Kesopanan, Keramahan, dan Kedisiplinan Petugas Layanan (Satpam dan Resepsionis)</td>
+                                    <td>{{ number_format($results->avg('avg_kompetensi_petugas'), 1) }}</td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <img src="../assets/images/faces/face7.jpg" class="mr-2" alt="image" /> Lida
-                                        Fitzgerald
-                                    </td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <span class="pr-2 d-flex align-items-center">65%</span>
-                                            <select id="star-5" name="rating" autocomplete="off">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>67453</td>
-                                    <td>765377</td>
+                                    <td>Kesopanan, Keramahan, dan Kedisiplinan Petugas Konsultasi</td>
+                                    <td>{{ number_format($results->avg('avg_kesopanan_petugas'), 1) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Kenyamanan Sarana dan Prasarana</td>
+                                    <td>{{ number_format($results->avg('avg_kualitas_sarana'), 1) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ketersediaan Kanal</td>
+                                    <td>{{ number_format($results->avg('avg_ketersediaan_kanal'), 1) }}</td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr class="table-success">
+                                    <td class="final-score">Nilai Akhir</td>
+                                    <td class="final-score">{{ number_format($finalScore, 2) }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" >Total Responden: {{ $totalRespondents }}</td>
+                                </tr>
+                            </tfoot>
                         </table>
-                    </div> --}}
-                    <a class="text-black font-13 d-block pt-2 pb-2 pb-lg-0 font-weight-bold pl-4" href="#">Show
-                        more</a>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -614,6 +549,16 @@
                 });
                 $("#doughnut-chart-legend5").html(trafficChart.generateLegend());
             }
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#layananTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                "info": true
+            });
         });
     </script>
 @endsection

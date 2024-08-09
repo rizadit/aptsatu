@@ -38,6 +38,15 @@
                     <div class="text-white">
                         <h1>INTEGRATED<br> SUPPORT<br> SERVICE</h1>
                         <p class="round1"> Area Layanan Terpadu </p>
+                        {{-- <p>{{ session()->get('user-data')['nama'] }}</p>
+                           <p>{{ session()->get('user-data')['nip'] }}</p> 
+                            <p>{{ session()->get('user-data')['eselon_2'] }}</p>
+                            <p>{{ session()->get('user-data')['eselon_3'] }}</p>
+                            <p>{{ session()->get('user-data')['eselon_4'] }}</p>
+                            <p>{{ session()->get('user-data')['kode_organisasi'] }}</p>
+                            <p>{{ session()->get('user-data')['kode_induk_organisasi'] }}</p>
+                            <p>{{ session()->get('user-data')['jabatan'] }}</p>
+                            <p>{{ session()->get('user-data')['idKantor'] }}</p> --}}
                         {{-- <button class="btn bg-white font-12">Ge Premium</button> --}}
                     </div>
                 </row>

@@ -80,8 +80,8 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="{{ route('panduan') }}">PANDUAN</a></li>
-                    <li><a href="#">BANTUAN</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="https://halodjkn.kemenkeu.go.id/">BANTUAN</a></li>
+                    <li><a href="https://klc2.kemenkeu.go.id/kms/faq/">FAQ</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

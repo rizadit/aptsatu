@@ -93,7 +93,7 @@
                                                     name="EMAIL" value="" />
                                                 <input type="hidden" name="ID_LAYANAN" class="form-control ID_LAYANAN">
                                                 <input type="hidden" name="ID_KANTOR" class="form-control ID_KANTOR"
-                                                    value="{{ session('kantor')->ID_KANTOR ?? session()->get('user-data')['kode_organisasi'] }}">
+                                                    value="{{ session('kantor')->ID_KANTOR ?? session()->get('user-data')['idKantor'] }}">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -312,7 +312,7 @@
                     }
                 }
             });
-            var namakantor = "{{ session('kantor')->URAIAN_KANTOR }}";
+            var namakantor = "{{ session('kantor')->URAIAN_KANTOR ?? session()->get('user-data')['URAIAN_KANTOR'] }}";
             $('.NAMA-KANTOR').text(namakantor);
             // Event listener untuk input nama
             $('.NAMA').on('input', function() {

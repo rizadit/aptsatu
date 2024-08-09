@@ -24,7 +24,7 @@ class InputDataLayananController extends Controller
 
     public function whatsapp($ID_KANAL)
     {
-        $idKantor = session('user')->ID_KANTOR;
+        $idKantor = session('user')->ID_KANTOR ?? session()->get('user-data')['idKantor'];
         $layanans = DB::table('T_LAYANAN')
 
 
@@ -62,7 +62,7 @@ class InputDataLayananController extends Controller
 
     public function telepon($ID_KANAL)
     {
-        $idKantor = session('user')->ID_KANTOR;
+        $idKantor = session('user')->ID_KANTOR ?? session()->get('user-data')['idKantor'];
         $layanans = DB::table('T_LAYANAN')
 
 

@@ -23,12 +23,12 @@ class Logout extends Controller
         $id_token = Session::get('id_token');
         //$post_logout_redirect_uri = route( 'ppid.landing');
         // $post_logout_redirect_uri = route('cms.login');
-        $post_logout_redirect_uri = '/';
+        $post_logout_redirect_uri = route('logout');
 
         $endsession_url = $uri . '?id_token_hint=' . $id_token . '&post_logout_redirect_uri=' . $post_logout_redirect_uri;
 
         Session::flush();
-
+        // print_r($endsession_url);
         return response()
             ->redirectTo($endsession_url);
     }

@@ -40,15 +40,61 @@ class Login extends Controller
         $dataUser = json_decode($this->requestKemenkeuID->requestUserInfo($token['access_token']));
         //print_r(dataUser);
         //exit()
-        $sessionDataUser = array(
-            'nama' => $dataUser->Data->Nama,
+        // $sessionDataUser = array(
+        //     'nama' => $dataUser->Data->Nama,
+        //     'nip' => $dataUser->Data->Nip18,
+        //     'eselon_2' => $dataUser->Data->Esl2,
+        //     'eselon_3' => $dataUser->Data->Esl3,
+        //     'eselon_4' => $dataUser->Data->Esl4,
+        //     'kode_organisasi' => $dataUser->Data->KodeOrganisasi,
+        //     'kode_induk_organisasi' => $dataUser->Data->KodeIndukOrganisasi,
+        //     'jabatan' => $dataUser->Data->Jabatan
+        // );
+        
+        if (strpos($dataUser->Data->Esl3, 'KPKNL') !== false) {
+            $sessionDataUser = array(
+                'nama' => $dataUser->Data->Nama,
             'nip' => $dataUser->Data->Nip18,
             'eselon_2' => $dataUser->Data->Esl2,
             'eselon_3' => $dataUser->Data->Esl3,
             'eselon_4' => $dataUser->Data->Esl4,
             'kode_organisasi' => $dataUser->Data->KodeOrganisasi,
-            'kode_induk_organisasi' => $dataUser->Data->KodeIndukOrganisasi
-        );
+            'kode_induk_organisasi' => $dataUser->Data->KodeIndukOrganisasi,
+            'jabatan' => $dataUser->Data->Jabatan,
+                'idKantor' => substr($dataUser->Data->KodeIndukOrganisasi, 0, 8),
+                'URAIAN_KANTOR' => $dataUser->Data->Esl3
+            );
+        } else {
+            if (strpos($dataUser->Data->Esl2, 'Kantor Wilayah') !== false) {
+                $sessionDataUser=array(
+                    'nama' => $dataUser->Data->Nama,
+            'nip' => $dataUser->Data->Nip18,
+            'eselon_2' => $dataUser->Data->Esl2,
+            'eselon_3' => $dataUser->Data->Esl3,
+            'eselon_4' => $dataUser->Data->Esl4,
+            'kode_organisasi' => $dataUser->Data->KodeOrganisasi,
+            'kode_induk_organisasi' => $dataUser->Data->KodeIndukOrganisasi,
+            'jabatan' => $dataUser->Data->Jabatan,
+                    'idKantor' => substr($dataUser->Data->KodeIndukOrganisasi, 0, 6),
+                    'URAIAN_KANTOR' => $dataUser->Data->Esl2
+                );
+            } else {
+                $sessionDataUser = array(
+                    'nama' => $dataUser->Data->Nama,
+            'nip' => $dataUser->Data->Nip18,
+            'eselon_2' => $dataUser->Data->Esl2,
+            'eselon_3' => $dataUser->Data->Esl3,
+            'eselon_4' => $dataUser->Data->Esl4,
+            'kode_organisasi' => $dataUser->Data->KodeOrganisasi,
+            'kode_induk_organisasi' => $dataUser->Data->KodeIndukOrganisasi,
+            'jabatan' => $dataUser->Data->Jabatan,
+                    'idKantor' => substr($dataUser->Data->KodeIndukOrganisasi, 0, 4),
+                    'URAIAN_KANTOR' => $dataUser->Data->Esl1
+                );
+            }
+        }
+        // print_r($dataUser);
+        // exit();
         Session::put('user-data', $sessionDataUser);
 
         // Force Logout KemenkeuID
